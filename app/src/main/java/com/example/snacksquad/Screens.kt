@@ -1,4 +1,4 @@
-package main.example.snacksquadbiraj
+package com.example.snacksquad
 
 sealed class Screens(val route: String) {
     object Home: Screens(route = "home")

@@ -1,4 +1,4 @@
-package main.example.snacksquadbiraj
+package com.example.snacksquad
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.shape.CircleShape

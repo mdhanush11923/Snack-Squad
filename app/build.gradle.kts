@@ -52,6 +52,7 @@ android {
 dependencies {
     val nav_version = "2.7.5"
 
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
     implementation("androidx.activity:activity-compose:1.8.0")
     implementation("androidx.compose.foundation:foundation:1.5.4")
     implementation("androidx.compose.material:material:1.5.4")

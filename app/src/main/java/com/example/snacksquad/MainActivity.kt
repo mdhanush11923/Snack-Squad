@@ -70,100 +70,105 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navController = rememberNavController()
+            BottomNavigation()
 
-            // Define your bottom navigation items
-            val bottomNavigationItems = listOf(
-                BottomNavItem("tab1", "Home", R.drawable.home),
-                BottomNavItem("tab2", "Search", R.drawable.search),
-                BottomNavItem("tab3", "Cart", R.drawable.shopping_cart),
-                BottomNavItem("tab4", "Profile", R.drawable.human)
-            )
-
-            Scaffold(
-                bottomBar = {
-                    BottomNavigation(
-                        modifier = Modifier
-                            .padding(20.dp)
-                            .clip(RoundedCornerShape(30.dp))
-                            .height(60.dp)
-                            .border(2.dp, Color.Black, RoundedCornerShape(30.dp)),
-                        backgroundColor = Color(0xff00484D),
-                    ) {
-                        val navBackStackEntry by navController.currentBackStackEntryAsState()
-                        val currentRoute = navBackStackEntry?.destination?.route
-
-                        bottomNavigationItems.forEach { item ->
-                            BottomNavigationItem(
-                                icon = {
-                                    Box(
-                                        modifier = Modifier.size(60.dp),
-                                        contentAlignment = Alignment.Center,
-                                    ) {
-                                        if (currentRoute == item.route) {
-                                            Box(
-                                                modifier = Modifier
-                                                    .size(50.dp)
-                                                    .clip(CircleShape)
-                                                    .background(Color(0xff72EEFF))
-                                                    .padding(5.dp),
-                                                contentAlignment = Alignment.Center
-                                            ) {
-                                                Icon(
-                                                    painter = painterResource(item.imgResource),
-                                                    contentDescription = item.label
-                                                )
-                                            }
-                                        } else {
-                                            Box(
-                                                modifier = Modifier
-                                                    .size(50.dp)
-                                                    .clip(CircleShape)
-                                                    .padding(5.dp),
-                                                contentAlignment = Alignment.Center
-                                            ) {
-                                                Icon(
-                                                    painter = painterResource(item.imgResource),
-                                                    contentDescription = item.label
-                                                )
-                                            }
-                                        }
-                                    }
-                                },
-                                selected = currentRoute == item.route,
-                                onClick = {
-                                    navController.navigate(item.route) {
-                                    }
-                                }
-                            )
-                        }
-                    }
-                }
-            ) { innerPadding ->
-                NavHost(
-                    navController = navController,
-                    startDestination = "tab1",
-                    modifier = Modifier.padding(innerPadding)
-                ) {
-                    composable("tab1") {
-                        Text("Tab 1 Content", modifier = Modifier.fillMaxSize())
-                    }
-                    composable("tab2") {
-                        Text("Tab 2 Content", modifier = Modifier.fillMaxSize())
-                    }
-                    composable("tab3") {
-                        Text("Tab 3 Content", modifier = Modifier.fillMaxSize())
-                    }
-                    composable("tab4") {
-                        Text("Tab 4 Content", modifier = Modifier.fillMaxSize())
-                    }
-                }
-            }
         }
     }
 }
 
 data class BottomNavItem(val route: String, val label: String, val imgResource: Int)
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun BottomNavigation() {
+    val navController = rememberNavController()
+
+    // Define your bottom navigation items
+    val bottomNavigationItems = listOf(
+        BottomNavItem("tab1", "Home", R.drawable.home),
+        BottomNavItem("tab2", "Search", R.drawable.search),
+        BottomNavItem("tab3", "Cart", R.drawable.shopping_cart),
+        BottomNavItem("tab4", "Profile", R.drawable.human)
+    )
+
+    Scaffold(
+        bottomBar = {
+            BottomNavigation(
+                modifier = Modifier
+                    .padding(20.dp)
+                    .clip(RoundedCornerShape(40.dp))
+                    .height(70.dp),
+                backgroundColor = Color(0xff00484D),
+            ) {
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route
+                bottomNavigationItems.forEach { item ->
+                    BottomNavigationItem(
+                        icon = {
+                            Box(
+                                modifier = Modifier.size(60.dp),
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                if (currentRoute == item.route) {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(55.dp)
+                                            .clip(CircleShape)
+                                            .background(Color(0xff72EEFF))
+                                            .padding(5.dp),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Icon(
+                                            painter = painterResource(item.imgResource),
+                                            contentDescription = item.label
+                                        )
+                                    }
+                                } else {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(55.dp)
+                                            .clip(CircleShape)
+                                            .padding(5.dp),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Icon(
+                                            painter = painterResource(item.imgResource),
+                                            contentDescription = item.label
+                                        )
+                                    }
+                                }
+                            }
+                        },
+                        selected = currentRoute == item.route,
+                        onClick = {
+                            navController.navigate(item.route) {
+                            }
+                        }
+                    )
+                }
+            }
+        }
+    ) { innerPadding ->
+        innerPadding
+        NavHost(
+            navController = navController,
+            startDestination = "tab1"
+        ) {
+            composable("tab1") {
+                OpeningPage()
+            }
+            composable("tab2") {
+                Text("Tab 2 Content", modifier = Modifier.fillMaxSize())
+            }
+            composable("tab3") {
+                Text("Tab 3 Content", modifier = Modifier.fillMaxSize())
+            }
+            composable("tab4") {
+                ProfileScreen()
+            }
+        }
+    }
+}
 
 @Composable
 @Preview

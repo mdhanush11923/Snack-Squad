@@ -1,4 +1,4 @@
-package main.example.snacksquadbiraj
+package com.example.snacksquad
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.Orientation

@@ -1,4 +1,4 @@
-package main.example.snacksquadbiraj
+package com.example.snacksquad
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost

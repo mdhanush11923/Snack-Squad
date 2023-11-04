@@ -130,10 +130,9 @@ fun CreateCategories(item: CategoryDetail, navController: NavController) {
                             colors = ButtonDefaults.buttonColors(Color(0xFF42271E)),
                             onClick = { navController.navigate(route = "${Screens.Menu.route}/${item.title}") },
                         ) {
-                            Icon(
-                                imageVector = Icons.Default.ArrowForward,
-                                contentDescription = "rightArrow",
-                                tint = Color.White
+                            Image(
+                                painter = painterResource(id = R.drawable.arrow),
+                                contentDescription = ""
                             )
                         }
                     }

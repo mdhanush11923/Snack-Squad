@@ -35,18 +35,18 @@ fun MenuScreen(categoryTitle: String? = null, navController: NavController) {
     ) {
         Card(
             backgroundColor = Color(0xFF40AFC2),
-            shape = RoundedCornerShape(15.dp, 15.dp, 15.dp, 15.dp),
+            shape = RoundedCornerShape(10.dp),
             modifier = Modifier
-                .width(350.dp)
-                .height(64.dp)
+                .width(310.dp)
+                .height(70.dp)
         ) {
             Text(
                 text = categoryTitle!!,
-                fontFamily = FontFamily(Font(R.font.montserratsemibold)),
-                fontSize = 23.sp,
+                fontFamily = FontFamily(Font(R.font.montserrat_bold)),
+                fontSize = 25.sp,
                 color = Color.White,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(13.dp)
+                modifier = Modifier.padding(top = 18.dp)
             )
         }
 

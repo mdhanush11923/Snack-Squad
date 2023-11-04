@@ -57,7 +57,7 @@ fun OpeningPage() {
                     .height(100.dp)
                     .fillMaxWidth()
                     .padding(40.dp, 5.dp, 40.dp, 50.dp)
-                ){
+                ){// Text Container
                     Text(
                         text = "A Customizable Snack Ordering And Delivery App",
                         textAlign = TextAlign.Center,
@@ -68,7 +68,7 @@ fun OpeningPage() {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                ) { // Container
+                ) { // Bottom Container
 
                     Box(modifier = Modifier) { // Bottom Layer
                         Column(modifier = Modifier) {

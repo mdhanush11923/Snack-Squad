@@ -182,7 +182,7 @@ fun CreateCategories(item: CategoryDetail, navController: NavController) {
 
                 Text(
                     text = "Gingerbread",
-                    fontSize = 16.sp,
+                    fontSize = 18.sp,
                     fontFamily = FontFamily(Font(R.font.mottersemico))
                 )
 

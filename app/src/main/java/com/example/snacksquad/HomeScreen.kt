@@ -30,14 +30,14 @@ fun HomeScreen(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .background(Color(0xFFFFF48F))
+            .padding(top = 30.dp)
             .fillMaxSize()
-            .padding(vertical = 40.dp)
     ) {
         Card(
             backgroundColor = Color(0xFF40AFC2),
             shape = RoundedCornerShape(15.dp),
             modifier = Modifier
-                .width(350.dp)
+                .width(300.dp)
                 .height(64.dp)
         ) {
             Text(
@@ -50,7 +50,7 @@ fun HomeScreen(navController: NavController) {
             )
         }
 
-        Spacer(modifier = Modifier.padding(14.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         LazyColumn(
             contentPadding = PaddingValues(
@@ -76,8 +76,7 @@ fun CreateCategories(item: CategoryDetail, navController: NavController) {
         modifier = Modifier
             .requiredWidth(450.dp)
             .height(320.dp),
-        shape = RoundedCornerShape(10.dp, 10.dp, 10.dp, 10.dp),
-        elevation = 1.dp
+        shape = RoundedCornerShape(10.dp, 10.dp, 10.dp, 10.dp)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,

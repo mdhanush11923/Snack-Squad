@@ -131,7 +131,7 @@ fun OpeningPage() {
                                     onClick = { /*TODO*/ },
                                     modifier = Modifier.fillMaxWidth()
                                 ) {
-                                    
+
                                 }
                             }
                         }

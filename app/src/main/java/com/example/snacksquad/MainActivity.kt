@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             SetStatusBarColor(color = Color(0xFFFFF48F))
             val navController = rememberNavController()
-            SetupNavGraph(navController = navController)
+            BottomNavigationScreen(navController = navController)
         }
     }
 }

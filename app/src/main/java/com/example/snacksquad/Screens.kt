@@ -1,7 +1,11 @@
 package com.example.snacksquad
 
 sealed class Screens(val route: String) {
-    object Home: Screens(route = "home")
-    object Menu: Screens(route = "menu")
-    object Food: Screens(route = "food")
+    object Home: Screens("home")
+    object Menu: Screens("menu")
+    object Food: Screens("food")
+    object Search : Screens("search")
+    object Cart : Screens("cart")
+    object Profile : Screens("profile")
+    object Blank : Screens("blank")
 }

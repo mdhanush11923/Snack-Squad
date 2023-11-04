@@ -31,22 +31,22 @@ fun MenuScreen(categoryTitle: String? = null, navController: NavController) {
         modifier = Modifier
             .background(Color(0xFFFFF48F))
             .fillMaxSize()
-            .padding(vertical = 40.dp)
+            .padding(top = 40.dp)
     ) {
         Card(
-            backgroundColor = Color(0xFF40AFC2),
-            shape = RoundedCornerShape(15.dp, 15.dp, 15.dp, 15.dp),
+            backgroundColor = Color(0xFFFF578E),
+            shape = RoundedCornerShape(10.dp),
             modifier = Modifier
-                .width(350.dp)
-                .height(64.dp)
+                .width(310.dp)
+                .height(70.dp)
         ) {
             Text(
                 text = categoryTitle!!,
-                fontFamily = FontFamily(Font(R.font.montserratsemibold)),
-                fontSize = 23.sp,
+                fontFamily = FontFamily(Font(R.font.montserrat_bold)),
+                fontSize = 27.sp,
                 color = Color.White,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(13.dp)
+                modifier = Modifier.padding(top = 16.dp)
             )
         }
 
@@ -87,7 +87,7 @@ fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavContro
             .clickable {
                 navController.navigate(route = Screens.Food.route)
             },
-        shape = RoundedCornerShape(10.dp),
+        shape = RoundedCornerShape(30.dp),
         elevation = 0.dp
     ) {
         Column(
@@ -101,25 +101,26 @@ fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavContro
             ) {
                 Text(
                     text = item.name,
-                    fontSize = 20.sp,
-                    fontFamily = FontFamily(Font(R.font.mottersemico))
+                    fontSize = 17.sp,
+                    fontFamily = FontFamily(Font(R.font.mottersemico)),
+                    modifier = Modifier.padding(top = 2.dp)
                 )
 
-                Spacer(modifier = Modifier.width(20.dp))
+                Spacer(modifier = Modifier.width(15.dp))
 
                 Surface(
-                    shape = CircleShape,
+                    shape = RoundedCornerShape(20.dp),
                     color = Color(0xFFFFCE80),
                     modifier = Modifier
-                        .height(28.dp)
+                        .height(26.dp)
                         .width(40.dp)
-                        .offset(y = 1.dp)
                 ) {
                     Text(
                         text = item.rating.toString(),
-                        fontFamily = FontFamily(Font(R.font.montserratreg)),
+                        fontFamily = FontFamily(Font(R.font.bebas_neue)),
                         textAlign = TextAlign.Center,
-                        modifier = Modifier.offset(y = 3.dp)
+                        modifier = Modifier.padding(top= 3.dp),
+                        fontSize = 17.sp
                     )
                 }
             }
@@ -127,8 +128,8 @@ fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavContro
             Spacer(modifier = Modifier.padding(5.dp))
             Text(
                 text = "Calories ${item.cal}",
-                fontSize = 13.sp,
-                fontFamily = FontFamily(Font(R.font.montserratreg))
+                fontSize = 12.sp,
+                fontFamily = FontFamily(Font(R.font.montserrat_semibold))
             )
         }
 
@@ -157,8 +158,8 @@ fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavContro
         ) {
             Text(
                 text = "$${item.price}",
-                fontSize = 20.sp,
-                fontFamily = FontFamily(Font(R.font.montserratreg))
+                fontSize = 18.sp,
+                fontFamily = FontFamily(Font(R.font.montserrat_semibold))
             )
         }
 
@@ -172,53 +173,41 @@ fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavContro
             Text(
                 text = "Qty",
                 fontSize = 14.sp,
-                fontFamily = FontFamily(Font(R.font.montserratreg)),
+                fontFamily = FontFamily(Font(R.font.montserrat_bold)),
             )
 
             Spacer(modifier = Modifier.width(5.dp))
 
-            Button(
-                shape = CircleShape,
-                colors = ButtonDefaults.buttonColors(Color.Black),
+            Box(
                 modifier = Modifier
                     .size(30.dp)
-                    .offset(y = 5.dp),
-                onClick = { /*TODO*/ },
-                contentPadding = PaddingValues(0.dp)
+                    .padding(top = 5.dp, start = 3.dp)
+                    .clickable {  }
             ) {
-                Text(
-                    text = "-",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Start,
-                    color = Color.White
+                Image(
+                    painter = painterResource(id = R.drawable.minus),
+                    contentDescription = ""
                 )
             }
 
             Spacer(modifier = Modifier.width(5.dp))
             Text(
                 text = "10",
-                fontSize = 14.sp,
-                fontFamily = FontFamily(Font(R.font.montserratreg))
+                fontSize = 16.sp,
+                fontFamily = FontFamily(Font(R.font.montserrat_bold))
             )
 
             Spacer(modifier = Modifier.width(5.dp))
 
-            Button(
-                shape = CircleShape,
-                colors = ButtonDefaults.buttonColors(Color.Black),
+            Box(
                 modifier = Modifier
                     .size(30.dp)
-                    .offset(y = 5.dp),
-                onClick = { /*TODO*/ },
-                contentPadding = PaddingValues(0.dp)
+                    .padding(top = 5.dp)
+                    .clickable {  }
             ) {
-                Text(
-                    text = "+",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Start,
-                    color = Color.White
+                Image(
+                    painter = painterResource(id = R.drawable.add),
+                    contentDescription = ""
                 )
             }
         }

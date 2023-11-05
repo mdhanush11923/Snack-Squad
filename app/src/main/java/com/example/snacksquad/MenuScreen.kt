@@ -10,6 +10,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,7 +26,7 @@ import androidx.navigation.NavController
 import com.example.snacksquad.R
 
 @Composable
-fun MenuScreen(categoryTitle: String? = null, navController: NavController) {
+fun MenuScreen(categoryTitle: String? = null, navController: NavController, sharedViewModel: SharedViewModel) {
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -67,7 +69,7 @@ fun MenuScreen(categoryTitle: String? = null, navController: NavController) {
             var ind = 0
 
             items(GetFoodItems()) { item: FoodDetail ->
-                CreateFoodColumn(item, colors[ind], navController)
+                CreateFoodColumn(item, colors[ind], navController, sharedViewModel)
 
                 ind++
                 if (ind > 2)
@@ -78,13 +80,14 @@ fun MenuScreen(categoryTitle: String? = null, navController: NavController) {
 }
 
 @Composable
-fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavController) {
+fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavController, sharedViewModel: SharedViewModel) {
     Surface(
         color = boxColor,
         modifier = Modifier
             .width(350.dp)
             .height(180.dp)
             .clickable {
+                sharedViewModel.addItem(newItem = item)
                 navController.navigate(route = Screens.Food.route)
             },
         shape = RoundedCornerShape(30.dp),
@@ -170,6 +173,8 @@ fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavContro
                 .padding(end = 30.dp, bottom = 25.dp)
         )
         {
+            val qty = remember { mutableStateOf(0) }
+
             Text(
                 text = "Qty",
                 fontSize = 14.sp,
@@ -182,7 +187,12 @@ fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavContro
                 modifier = Modifier
                     .size(30.dp)
                     .padding(top = 5.dp, start = 3.dp)
-                    .clickable {  }
+                    .clickable {
+                        if (qty.value > 0) {
+                            qty.value--
+                            item.qty--
+                        }
+                    }
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.minus),
@@ -192,7 +202,7 @@ fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavContro
 
             Spacer(modifier = Modifier.width(5.dp))
             Text(
-                text = "10",
+                text = qty.value.toString(),
                 fontSize = 16.sp,
                 fontFamily = FontFamily(Font(R.font.montserrat_bold))
             )
@@ -203,7 +213,10 @@ fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavContro
                 modifier = Modifier
                     .size(30.dp)
                     .padding(top = 5.dp)
-                    .clickable {  }
+                    .clickable {
+                        qty.value++
+                        item.qty++
+                    }
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.add),

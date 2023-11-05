@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -12,6 +13,8 @@ import androidx.navigation.compose.composable
 fun SetupNavGraph(
     navController: NavHostController
 ) {
+    val sharedViewModel: SharedViewModel = viewModel()
+
     NavHost(
         navController = navController,
         startDestination = Screens.Profile.route
@@ -42,11 +45,11 @@ fun SetupNavGraph(
 
         composable(route = "${Screens.Menu.route}/{categoryTitle}") {
             val categoryTitle = it.arguments?.getString("categoryTitle")
-            MenuScreen(categoryTitle = categoryTitle, navController = navController)
+            MenuScreen(categoryTitle = categoryTitle, navController = navController, sharedViewModel = sharedViewModel)
         }
 
         composable(route = Screens.Food.route) {
-            FoodScreen(navController = navController)
+            FoodScreen(navController = navController, sharedViewModel = sharedViewModel)
         }
 
         composable(route = Screens.Search.route) {

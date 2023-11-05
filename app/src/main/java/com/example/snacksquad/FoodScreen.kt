@@ -12,6 +12,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,7 +32,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
-fun FoodScreen(navController: NavController) {
+fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
+    val item = sharedViewModel.item
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start,
@@ -76,7 +79,8 @@ fun FoodScreen(navController: NavController) {
                 modifier = Modifier
                     .padding(start = 65.dp, bottom = 20.dp)
             ) {
-                Text(text = "Gingerbread",
+                Text(
+                    text = item?.name!!,
                     fontSize = 20.sp,
                     fontFamily = FontFamily(Font(R.font.mottersemico))
                 )
@@ -92,7 +96,7 @@ fun FoodScreen(navController: NavController) {
                         .offset(y = 1.dp)
                 ) {
                     Text(
-                        text = "4.0",
+                        text = item.rating.toString(),
                         fontFamily = FontFamily(Font(R.font.montserratreg)),
                         textAlign = TextAlign.Center,
                         modifier = Modifier.offset(y = 3.dp)
@@ -102,7 +106,7 @@ fun FoodScreen(navController: NavController) {
                 Spacer(modifier = Modifier.padding(7.dp))
 
                 Text(
-                    text = "$4.99",
+                    text = "$${item.price}",
                     fontSize = 20.sp,
                     fontFamily = FontFamily(Font(R.font.montserratreg))
                 )
@@ -115,13 +119,13 @@ fun FoodScreen(navController: NavController) {
                 .requiredWidth(450.dp)
                 .height(520.dp)
                 .background(Color(0xFF5CE1E6))
-                .padding(start = 65.dp, end = 65.dp, bottom = 5.dp)
+                .padding(start = 65.dp, end = 65.dp, bottom = 55.dp)
                 .verticalScroll(rememberScrollState())
         ) {
             Spacer(modifier = Modifier.padding(10.dp))
 
             Text(
-                text= "Details",
+                text = "Details",
                 fontFamily = FontFamily(Font(R.font.montserratreg)),
                 fontSize = 15.sp,
                 color = Color(0xFF545454)
@@ -130,7 +134,7 @@ fun FoodScreen(navController: NavController) {
             Spacer(modifier = Modifier.padding(10.dp))
 
             Text(
-                text= "Calories: 200",
+                text = "Calories: ${item?.cal}",
                 fontFamily = FontFamily(Font(R.font.montserratreg)),
                 fontSize = 18.sp,
             )
@@ -138,7 +142,7 @@ fun FoodScreen(navController: NavController) {
             Spacer(modifier = Modifier.padding(5.dp))
 
             Text(
-                text = "gsgasfga4advfadfvadvaadvfadfvafewevwrvwvvwvavfdv",
+                text = item?.desc!!,
                 fontFamily = FontFamily(Font(R.font.montserratreg)),
                 fontSize = 18.sp,
                 color = Color(0xFF545454)
@@ -155,7 +159,7 @@ fun FoodScreen(navController: NavController) {
     )
     {
         Image(
-            painter = painterResource(id = R.drawable.circle),
+            painter = painterResource(id = item?.image!!),
             contentDescription = "",
             modifier = Modifier
                 .size(180.dp)
@@ -171,7 +175,7 @@ fun FoodScreen(navController: NavController) {
             .background(color = Color.Transparent)
             .padding(bottom = 20.dp)
     ) {
-        Surface (
+        Surface(
             shape = RoundedCornerShape(40.dp),
             modifier = Modifier
                 .height(70.dp)
@@ -185,6 +189,8 @@ fun FoodScreen(navController: NavController) {
                 modifier = Modifier
                     .padding(start = 50.dp, end = 20.dp)
             ) {
+                val qty = remember { mutableStateOf(item?.qty!!) }
+
                 Text(
                     text = "Quantity",
                     fontFamily = FontFamily(Font(R.font.montserratreg)),
@@ -196,7 +202,12 @@ fun FoodScreen(navController: NavController) {
                     colors = ButtonDefaults.buttonColors(Color.Black),
                     modifier = Modifier
                         .size(30.dp),
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        if (qty.value > 0) {
+                            qty.value--;
+                            item?.qty = qty.value
+                        }
+                    },
                     contentPadding = PaddingValues(0.dp)
                 ) {
                     Text(
@@ -209,7 +220,7 @@ fun FoodScreen(navController: NavController) {
                 }
 
                 Text(
-                    text = "10",
+                    text = qty.value.toString(),
                     fontSize = 15.sp,
                     fontFamily = FontFamily(Font(R.font.montserratreg))
                 )
@@ -219,7 +230,10 @@ fun FoodScreen(navController: NavController) {
                     colors = ButtonDefaults.buttonColors(Color.Black),
                     modifier = Modifier
                         .size(30.dp),
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        qty.value++
+                        item?.qty = qty.value
+                    },
                     contentPadding = PaddingValues(0.dp)
                 ) {
                     Text(
@@ -245,10 +259,12 @@ fun FoodScreen(navController: NavController) {
                         contentDescription = "",
                         modifier = Modifier
                             .requiredSize(30.dp)
+                            .clickable {
+
+                            }
                     )
                 }
             }
         }
     }
-
 }

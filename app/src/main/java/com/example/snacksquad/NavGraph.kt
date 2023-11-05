@@ -14,8 +14,28 @@ fun SetupNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screens.Home.route
+        startDestination = Screens.Profile.route
     ) {
+        composable(route = Screens.Opening.route) {
+            HomeScreen(navController = navController)
+        }
+
+        composable(route = Screens.Registration1.route) {
+            HomeScreen(navController = navController)
+        }
+
+        composable(route = Screens.Registration2.route) {
+            HomeScreen(navController = navController)
+        }
+
+        composable(route = Screens.Registration3.route) {
+            HomeScreen(navController = navController)
+        }
+
+        composable(route = Screens.Registration4.route) {
+            HomeScreen(navController = navController)
+        }
+
         composable(route = Screens.Home.route) {
             HomeScreen(navController = navController)
         }
@@ -32,12 +52,15 @@ fun SetupNavGraph(
         composable(route = Screens.Search.route) {
             Text("Tab 2 Content", modifier = Modifier.fillMaxSize())
         }
+
         composable(route = Screens.Cart.route) {
             Text("Tab 3 Content", modifier = Modifier.fillMaxSize())
         }
+
         composable(route = Screens.Profile.route) {
             ProfileScreen()
         }
+
         composable(route = Screens.Blank.route) {
             OpeningPage()
         }

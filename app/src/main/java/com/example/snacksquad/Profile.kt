@@ -49,6 +49,7 @@ fun ProfileScreen() {
     var isErrorInFistname = false
     var lastName by remember { mutableStateOf("") }
     var isErrorInLastname = false
+    var fieldShape = RoundedCornerShape(10.dp)
 
     Box(
         modifier = Modifier
@@ -124,7 +125,7 @@ fun ProfileScreen() {
 
                             Column(modifier = Modifier
                                 .fillMaxHeight()
-                                .width(135.dp)
+                                .width(140.dp)
                             ) {
 
                                 Column {
@@ -143,6 +144,8 @@ fun ProfileScreen() {
                                             firstName = it
                                             isErrorInFistname = it.isEmpty()
                                         },
+
+                                        shape = fieldShape,
 
                                         label = { Text(text = "Firstname") },
 
@@ -178,7 +181,7 @@ fun ProfileScreen() {
 
                             Column(modifier = Modifier
                                 .fillMaxHeight()
-                                .width(135.dp)
+                                .width(140.dp)
                             ) {
 
                                 Column {
@@ -197,6 +200,8 @@ fun ProfileScreen() {
                                             lastName = it
                                             isErrorInFistname = it.isEmpty()
                                         },
+
+                                        shape = fieldShape,
 
                                         label = { Text(text = "Lastname") },
 
@@ -252,6 +257,8 @@ fun ProfileScreen() {
 
                                 label = { Text(text = "Enter username") },
 
+                                shape = fieldShape,
+
                                 modifier = Modifier
                                     .align(alignment = Alignment.CenterHorizontally)
                                     .fillMaxWidth(),
@@ -304,6 +311,8 @@ fun ProfileScreen() {
 
                                 label = { Text(text = "Enter username") },
 
+                                shape = fieldShape,
+
                                 modifier = Modifier
                                     .align(alignment = Alignment.CenterHorizontally)
                                     .fillMaxWidth(),
@@ -352,41 +361,7 @@ fun ProfileScreen() {
 
                                 label = { Text(text = "Enter username") },
 
-                                modifier = Modifier
-                                    .align(alignment = Alignment.CenterHorizontally)
-                                    .fillMaxWidth(),
-
-                                textStyle = TextStyle(
-                                    fontFamily = FontFamily(
-                                        Font(R.font.montserrat_semibold)
-                                    )
-                                ),
-
-                                colors = TextFieldDefaults.textFieldColors(
-                                    containerColor = Color(0xFFF5F5F5),
-                                    cursorColor = Color.Black,
-                                    focusedIndicatorColor = Color.Black,
-                                    focusedLabelColor = Color.Black
-                                ),
-
-                                supportingText = {
-                                    if (isErrorInFistname) {
-                                        Text(text = "Fill it")
-                                    }
-                                },
-
-                                isError = isErrorInFistname
-                            )
-
-                            OutlinedTextField(
-                                value = lastName,
-
-                                onValueChange = {
-                                    lastName = it
-                                    isErrorInFistname = it.isEmpty()
-                                },
-
-                                label = { Text(text = "Enter username") },
+                                shape = fieldShape,
 
                                 modifier = Modifier
                                     .align(alignment = Alignment.CenterHorizontally)
@@ -423,6 +398,46 @@ fun ProfileScreen() {
                                 },
 
                                 label = { Text(text = "Enter username") },
+
+                                shape = fieldShape,
+
+                                modifier = Modifier
+                                    .align(alignment = Alignment.CenterHorizontally)
+                                    .fillMaxWidth(),
+
+                                textStyle = TextStyle(
+                                    fontFamily = FontFamily(
+                                        Font(R.font.montserrat_semibold)
+                                    )
+                                ),
+
+                                colors = TextFieldDefaults.textFieldColors(
+                                    containerColor = Color(0xFFF5F5F5),
+                                    cursorColor = Color.Black,
+                                    focusedIndicatorColor = Color.Black,
+                                    focusedLabelColor = Color.Black
+                                ),
+
+                                supportingText = {
+                                    if (isErrorInFistname) {
+                                        Text(text = "Fill it")
+                                    }
+                                },
+
+                                isError = isErrorInFistname
+                            )
+
+                            OutlinedTextField(
+                                value = lastName,
+
+                                onValueChange = {
+                                    lastName = it
+                                    isErrorInFistname = it.isEmpty()
+                                },
+
+                                label = { Text(text = "Enter username") },
+
+                                shape = fieldShape,
 
                                 modifier = Modifier
                                     .align(alignment = Alignment.CenterHorizontally)
@@ -481,7 +496,7 @@ fun ProfileScreen() {
                             .align(alignment = TopCenter)
                             .padding(bottom = 20.dp)
                             .fillMaxWidth()
-                            .height(70.dp),
+                            .height(65.dp),
                         colors = ButtonDefaults.outlinedButtonColors(
                                 containerColor = Color(0xffC1FF72),
                                 contentColor = Color.Black

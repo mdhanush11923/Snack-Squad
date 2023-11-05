@@ -41,14 +41,25 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(navController: NavController) {
     var firstName by remember { mutableStateOf("") }
     var isErrorInFistname = false
     var lastName by remember { mutableStateOf("") }
     var isErrorInLastname = false
+    var emailId by remember { mutableStateOf("") }
+    var isErrorInEmailId = false
+    var password by remember { mutableStateOf("") }
+    var isErrorInPassword = false
+    var address1 by remember { mutableStateOf("") }
+    var isErrorInAddress1 = false
+    var address2 by remember { mutableStateOf("") }
+    var isErrorInAddress2 = false
+    var address3 by remember { mutableStateOf("") }
+    var isErrorInAddress3 = false
     var fieldShape = RoundedCornerShape(10.dp)
 
     Box(
@@ -64,7 +75,8 @@ fun ProfileScreen() {
                     modifier = Modifier
                     .height(280.dp)
                     .fillMaxWidth()
-                    .padding(80.dp, 30.dp, 80.dp, 0.dp)
+                    .padding(80.dp, 30.dp, 80.dp, 0.dp),
+                    contentAlignment = Center
                 ) {
                     Column(modifier = Modifier.fillMaxSize()) {
 
@@ -198,7 +210,7 @@ fun ProfileScreen() {
 
                                         onValueChange = {
                                             lastName = it
-                                            isErrorInFistname = it.isEmpty()
+                                            isErrorInLastname = it.isEmpty()
                                         },
 
                                         shape = fieldShape,
@@ -248,11 +260,11 @@ fun ProfileScreen() {
                             )
 
                             OutlinedTextField(
-                                value = lastName,
+                                value = emailId,
 
                                 onValueChange = {
-                                    lastName = it
-                                    isErrorInFistname = it.isEmpty()
+                                    emailId = it
+                                    isErrorInEmailId = it.isEmpty()
                                 },
 
                                 label = { Text(text = "Enter username") },
@@ -277,12 +289,12 @@ fun ProfileScreen() {
                                 ),
 
                                 supportingText = {
-                                    if (isErrorInFistname) {
+                                    if (isErrorInEmailId) {
                                         Text(text = "Fill it")
                                     }
                                 },
 
-                                isError = isErrorInFistname
+                                isError = isErrorInEmailId
                             )
 
 
@@ -298,15 +310,15 @@ fun ProfileScreen() {
                             )
 
                             OutlinedTextField(
-                                value = lastName,
+                                value = password,
 
                                 visualTransformation = PasswordVisualTransformation(),
 
                                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
 
                                 onValueChange = {
-                                    lastName = it
-                                    isErrorInFistname = it.isEmpty()
+                                    password = it
+                                    isErrorInPassword = it.isEmpty()
                                 },
 
                                 label = { Text(text = "Enter username") },
@@ -331,12 +343,12 @@ fun ProfileScreen() {
                                 ),
 
                                 supportingText = {
-                                    if (isErrorInFistname) {
+                                    if (isErrorInPassword) {
                                         Text(text = "Fill it")
                                     }
                                 },
 
-                                isError = isErrorInFistname
+                                isError = isErrorInPassword
                             )
 
 
@@ -352,11 +364,11 @@ fun ProfileScreen() {
                             )
 
                             OutlinedTextField(
-                                value = lastName,
+                                value = address1,
 
                                 onValueChange = {
-                                    lastName = it
-                                    isErrorInFistname = it.isEmpty()
+                                    address1 = it
+                                    isErrorInAddress1 = it.isEmpty()
                                 },
 
                                 label = { Text(text = "Enter username") },
@@ -381,20 +393,20 @@ fun ProfileScreen() {
                                 ),
 
                                 supportingText = {
-                                    if (isErrorInFistname) {
+                                    if (isErrorInAddress1) {
                                         Text(text = "Fill it")
                                     }
                                 },
 
-                                isError = isErrorInFistname
+                                isError = isErrorInAddress1
                             )
 
                             OutlinedTextField(
-                                value = lastName,
+                                value = address2,
 
                                 onValueChange = {
-                                    lastName = it
-                                    isErrorInFistname = it.isEmpty()
+                                    address2 = it
+                                    isErrorInAddress2 = it.isEmpty()
                                 },
 
                                 label = { Text(text = "Enter username") },
@@ -419,20 +431,20 @@ fun ProfileScreen() {
                                 ),
 
                                 supportingText = {
-                                    if (isErrorInFistname) {
+                                    if (isErrorInAddress2) {
                                         Text(text = "Fill it")
                                     }
                                 },
 
-                                isError = isErrorInFistname
+                                isError = isErrorInAddress2
                             )
 
                             OutlinedTextField(
-                                value = lastName,
+                                value = address3,
 
                                 onValueChange = {
-                                    lastName = it
-                                    isErrorInFistname = it.isEmpty()
+                                    address3 = it
+                                    isErrorInAddress3 = it.isEmpty()
                                 },
 
                                 label = { Text(text = "Enter username") },
@@ -457,12 +469,12 @@ fun ProfileScreen() {
                                 ),
 
                                 supportingText = {
-                                    if (isErrorInFistname) {
+                                    if (isErrorInAddress3) {
                                         Text(text = "Fill it")
                                     }
                                 },
 
-                                isError = isErrorInFistname
+                                isError = isErrorInAddress3
                             )
 
                         }
@@ -482,13 +494,41 @@ fun ProfileScreen() {
                         onClick = {
                             if (firstName.isNotEmpty()) {
                                 if (lastName.isNotEmpty()) {
+                                    if (emailId.isNotEmpty()) {
+                                        if (password.isNotEmpty()) {
+                                            if (address1.isNotEmpty()) {
+                                                if (address2.isNotEmpty()) {
+                                                    if (address3.isNotEmpty()) {
+
+                                                        navController.navigate(route = Screens.Blank.route)
+
+                                                    }
+                                                    else {
+                                                        isErrorInLastname = true
+                                                    }
+                                                }
+                                                else {
+                                                    isErrorInAddress2 = true
+                                                }
+                                            }
+                                            else {
+                                                isErrorInAddress1 = true
+                                            }
+                                        }
+                                        else {
+                                            isErrorInPassword = true
+                                        }
+                                    }
+                                    else {
+                                        isErrorInEmailId = true
+                                    }
                                 }
                                 else {
                                     isErrorInLastname = true
                                 }
                             }
                             else {
-                                isErrorInLastname = true
+                                isErrorInFistname = true
                             }
                         },
                         shape = RoundedCornerShape(25.dp),

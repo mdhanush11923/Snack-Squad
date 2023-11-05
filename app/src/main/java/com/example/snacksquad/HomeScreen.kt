@@ -31,47 +31,45 @@ fun HomeScreen(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .background(Color(0xFFFFF48F))
-            .padding(top = 30.dp)
             .fillMaxSize()
     ) {
-        Card(
-            backgroundColor = Color(0xFF40AFC2),
-            shape = RoundedCornerShape(10.dp),
-            modifier = Modifier
-                .width(310.dp)
-                .height(70.dp)
-        ) {
-            Row{
-                Text(
-                    text = "Welcome, ",
-                    fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
-                    fontSize = 25.sp,
-                    color = Color.White,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(top = 18.dp, start = 27.dp)
-                )
-                Text(
-                    text = "Dhanush",
-                    fontFamily = FontFamily(Font(R.font.montserrat_bold)),
-                    fontSize = 25.sp,
-                    color = Color.White,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(top = 18.dp)
-                )
-            }
-
-        }
-
-        Spacer(modifier = Modifier.height(25.dp))
-
         LazyColumn(
-            contentPadding = PaddingValues(
-                start = 10.dp,
-                end = 10.dp,
-                top = 10.dp
-            ),
             verticalArrangement = Arrangement.spacedBy(3.dp)
         ) {
+
+            item {
+                Box(
+                    modifier = Modifier.padding(start = 25.dp, top = 30.dp, bottom = 30.dp)
+                ) {
+                    Card(
+                        backgroundColor = Color(0xFF40AFC2),
+                        shape = RoundedCornerShape(10.dp),
+                        modifier = Modifier
+                            .width(310.dp)
+                            .height(70.dp)
+                    ) {
+                        Row{
+                            androidx.compose.material3.Text(
+                                text = "Welcome, ",
+                                fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                                fontSize = 25.sp,
+                                color = Color.White,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.padding(top = 18.dp, start = 27.dp)
+                            )
+                            androidx.compose.material3.Text(
+                                text = "Dhanush",
+                                fontFamily = FontFamily(Font(R.font.montserrat_bold)),
+                                fontSize = 25.sp,
+                                color = Color.White,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.padding(top = 18.dp)
+                            )
+                        }
+
+                    }
+                }
+            }
             items(GetCategories()) { item: CategoryDetail ->
                 CreateCategories(item, navController)
                 //CreateCategories(title = item.title, boxColor = item.boxColor, subBoxColor = item.subBoxColor, route = item.route, navController)
@@ -145,14 +143,14 @@ fun CreateCategories(item: CategoryDetail, navController: NavController) {
                         shape = RoundedCornerShape(10.dp),
                         modifier = Modifier
                             .width(300.dp)
-                            .height(55.dp)
+                            .height(60.dp)
                     ) {
                         Text(
                             text = item.title,
                             fontSize = 23.sp,
                             fontFamily = FontFamily(Font(R.font.montserrat_bold)),
                             color = Color.White,
-                            modifier = Modifier.padding(top = 10.dp, start = 50.dp)
+                            modifier = Modifier.padding(top = 15.dp, start = 50.dp)
                         )
                     }
 

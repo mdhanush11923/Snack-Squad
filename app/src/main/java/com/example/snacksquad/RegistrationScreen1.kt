@@ -58,11 +58,6 @@ fun RegistrationScreen1(navController: NavController) {
     var password by remember { mutableStateOf("") }
     var isErrorInPassword = false
     var fieldShape = RoundedCornerShape(10.dp)
-    var categoryNameStartPadding = 15.dp
-    var categoryNameFontFamily = FontFamily(
-        Font(R.font.montserrat_bold)
-    )
-    var categoryNameSize = 16.sp
 
     Box(
         modifier = Modifier

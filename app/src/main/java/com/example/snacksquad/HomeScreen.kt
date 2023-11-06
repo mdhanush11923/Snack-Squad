@@ -23,12 +23,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import kotlin.reflect.typeOf
 
 @Composable
 fun HomeScreen(navController: NavController, sharedViewModel: SharedViewModel) {
+    //FoodItems().CreateFoodItemList()
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -75,7 +78,6 @@ fun HomeScreen(navController: NavController, sharedViewModel: SharedViewModel) {
             }
             items(GetCategories()) { item: CategoryDetail ->
                 CreateCategories(item, navController, sharedViewModel)
-                //CreateCategories(title = item.title, boxColor = item.boxColor, subBoxColor = item.subBoxColor, route = item.route, navController)
             }
 
             item { Spacer(modifier = Modifier.height(80.dp)) }
@@ -164,7 +166,7 @@ fun CreateCategories(item: CategoryDetail, navController: NavController, sharedV
                     contentPadding = PaddingValues(start = 70.dp, end = 60.dp),
                     horizontalArrangement = Arrangement.spacedBy(30.dp)
                 ) {
-                    items(GetFoodItems()) { item: FoodDetail ->
+                    items(GetFoodItems(categoryTitle = item.title).subList(0,5)) { item: FoodDetail ->
                         CreateFoodRow(item = item, navController = navController, sharedViewModel = sharedViewModel)
                     }
                 }
@@ -179,7 +181,13 @@ fun CreateCategories(item: CategoryDetail, navController: NavController, sharedV
                         navController.navigate(Screens.Food.route)
                     }
                 ) {
-
+                    Image(
+                        painter = painterResource(id = snackOfTheDay.image),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .size(120.dp)
+                    )
                 }
 
                 Spacer(modifier = Modifier.padding(5.dp))
@@ -218,6 +226,9 @@ fun CreateFoodRow(item: FoodDetail, navController: NavController, sharedViewMode
             Image(
                 painter = painterResource(id = item.image),
                 contentDescription = "",
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .size(120.dp)
             )
         }
 
@@ -226,7 +237,11 @@ fun CreateFoodRow(item: FoodDetail, navController: NavController, sharedViewMode
         Text(
             text = item.name,
             fontSize = 16.sp,
-            fontFamily = FontFamily(Font(R.font.mottersemico))
+            fontFamily = FontFamily(Font(R.font.mottersemico)),
+            textAlign = TextAlign.Center,
+            //overflow = TextOverflow.Ellipsis
+            modifier = Modifier
+                .requiredWidth(165.dp)
         )
     }
 }

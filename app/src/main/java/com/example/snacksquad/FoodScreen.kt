@@ -72,24 +72,26 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
 
             Spacer(modifier = Modifier.padding(10.dp))
 
-            Surface(
-                color = Color(0xFF53DEE8),
+        Surface(
+            color = Color(0xFF53DEE8),
+            modifier = Modifier
+                .requiredWidth(450.dp)
+                .height(180.dp),
+            elevation = 0.dp
+        ) {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.Start,
                 modifier = Modifier
-                    .requiredWidth(450.dp)
-                    .height(180.dp),
-                elevation = 0.dp
+                    .padding(start = 65.dp, bottom = 20.dp)
             ) {
-                Column(
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.Start,
+                Text(
+                    text = item?.name!!,
+                    fontSize = 20.sp,
+                    fontFamily = FontFamily(Font(R.font.mottersemico)),
                     modifier = Modifier
-                        .padding(start = 65.dp, bottom = 20.dp)
-                ) {
-                    Text(
-                        text = item?.name!!,
-                        fontSize = 20.sp,
-                        fontFamily = FontFamily(Font(R.font.mottersemico))
-                    )
+                        .requiredWidth(160.dp)
+                )
 
                     Spacer(modifier = Modifier.padding(7.dp))
 
@@ -137,7 +139,7 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                     color = Color(0xFF545454)
                 )
 
-                Spacer(modifier = Modifier.padding(10.dp))
+            Spacer(modifier = Modifier.padding(5.dp))
 
                 Text(
                     text = "Calories: ${item?.cal}",
@@ -176,25 +178,39 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                             seeMore = !seeMore
                         }
                 )
+                Spacer(modifier = Modifier.padding(5.dp))
+
+                Text(
+                    text = "Ingredients: ${item.ingr}",
+                    fontFamily = FontFamily(Font(R.font.montserratreg)),
+                    fontSize = 18.sp,
+                )
             }
         }
 
-        Row(
-            horizontalArrangement = Arrangement.End,
+    Row(
+        horizontalArrangement = Arrangement.End,
+        modifier = Modifier
+            .height(200.dp)
+            .fillMaxWidth()
+            .padding(end = 20.dp, top = 20.dp)
+    )
+    {
+        Box(
             modifier = Modifier
-                .height(200.dp)
-                .fillMaxWidth()
-                .padding(end = 20.dp, top = 20.dp)
-        )
-        {
+                .clip(CircleShape)
+                .size(180.dp)
+                .background(Color.White)
+        ) {
             Image(
                 painter = painterResource(id = item?.image!!),
                 contentDescription = "",
                 modifier = Modifier
+                    .clip(CircleShape)
                     .size(180.dp)
-                    .offset(y = 15.dp)
             )
         }
+    }
 
         Column(
             verticalArrangement = Arrangement.Bottom,

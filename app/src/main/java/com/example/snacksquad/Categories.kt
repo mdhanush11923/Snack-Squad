@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
+import kotlin.random.Random
 
 data class CategoryDetail(
     val title: String,
@@ -27,6 +28,12 @@ data class FoodDetail(
     val route: String = "tbd"
 )
 
+fun GetSnackOfTheDay(): FoodDetail {
+    val foodList = GetFoodItems()
+    val snack = foodList[3]//foodList[Random.nextInt(foodList.size)]
+
+    return snack
+}
 fun GetFoodItems(): MutableList<FoodDetail> {
     val food = mutableListOf<FoodDetail>()
     food.add(FoodDetail(

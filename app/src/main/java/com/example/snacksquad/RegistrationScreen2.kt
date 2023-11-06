@@ -78,7 +78,7 @@ fun RegistrationScreen2(navController: NavController) {
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
-                        text = "1/4",
+                        text = "2/4",
                         textAlign = TextAlign.Center,
                         fontSize = 16.sp,
                         color = Color.Black,
@@ -87,7 +87,7 @@ fun RegistrationScreen2(navController: NavController) {
                 }
 
                 Text(
-                    text = "The start is a piece of cake!",
+                    text = "Let's Craft Your Snackster Story",
                     textAlign = TextAlign.Center,
                     fontFamily = FontFamily(Font(R.font.mottersemico)),
                     fontSize = 22.sp,
@@ -101,7 +101,7 @@ fun RegistrationScreen2(navController: NavController) {
                     .padding(horizontal = 50.dp)
                 ){// Pie Container
                     Image(
-                        painter = painterResource(id = R.drawable.piepiece1),
+                        painter = painterResource(id = R.drawable.piepiece2),
                         contentDescription = "Pie Image",
                         modifier = Modifier
                             .fillMaxSize()
@@ -122,16 +122,17 @@ fun RegistrationScreen2(navController: NavController) {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(20.dp, 30.dp, 20.dp, 0.dp),
+                            .padding(30.dp),
                         verticalArrangement = Arrangement.spacedBy(5.dp)
                     ) {
                         Box(
                             modifier = Modifier
-                                .fillMaxWidth(),
+                                .fillMaxWidth()
+                                .padding(vertical = 20.dp),
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = "Create Profile",
+                                text = "Do you have any dietary preferences?",
                                 textAlign = TextAlign.Center,
                                 fontFamily = FontFamily(Font(R.font.mottersemico)),
                                 fontSize = 22.sp,
@@ -139,10 +140,10 @@ fun RegistrationScreen2(navController: NavController) {
                             )
                         }
 
-                        Box(modifier = Modifier.padding(top = 10.dp)) {
+                        Box(modifier = Modifier.padding(vertical = 10.dp)) {
                             Button(
                                 onClick = {
-                                    navController.navigate(route = Screens.Registration2.route)
+                                    navController.navigate(route = Screens.Registration3.route)
                                 },
                                 shape = RoundedCornerShape(25.dp),
                                 modifier = Modifier
@@ -150,14 +151,42 @@ fun RegistrationScreen2(navController: NavController) {
                                     .fillMaxWidth()
                                     .height(70.dp),
                                 colors = ButtonDefaults.outlinedButtonColors(
-                                    containerColor = Color(0xff5CE1E6),
+                                    containerColor = Color(0xffC1FF72),
                                     contentColor = Color.Black
                                 ),
                                 border = BorderStroke(width = 2.dp, color = Color.Black)
 
                             ) {
                                 Text(
-                                    text = "Get Started",
+                                    text = "Yes, please",
+                                    fontFamily = FontFamily(
+                                        Font(R.font.montserrat_bold)
+                                    ),
+                                    fontSize = 18.sp,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
+
+                        Box(modifier = Modifier.padding(top = 10.dp)) {
+                            Button(
+                                onClick = {
+                                    navController.navigate(route = Screens.Registration3.route)
+                                },
+                                shape = RoundedCornerShape(25.dp),
+                                modifier = Modifier
+                                    .align(alignment = Alignment.BottomCenter)
+                                    .fillMaxWidth()
+                                    .height(70.dp),
+                                colors = ButtonDefaults.outlinedButtonColors(
+                                    containerColor = Color(0xffFF7070),
+                                    contentColor = Color.Black
+                                ),
+                                border = BorderStroke(width = 2.dp, color = Color.Black)
+
+                            ) {
+                                Text(
+                                    text = "Nope",
                                     fontFamily = FontFamily(
                                         Font(R.font.montserrat_bold)
                                     ),

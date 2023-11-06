@@ -82,7 +82,9 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                 Text(
                     text = item?.name!!,
                     fontSize = 20.sp,
-                    fontFamily = FontFamily(Font(R.font.mottersemico))
+                    fontFamily = FontFamily(Font(R.font.mottersemico)),
+                    modifier = Modifier
+                        .requiredWidth(160.dp)
                 )
 
                 Spacer(modifier = Modifier.padding(7.dp))
@@ -131,7 +133,7 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                 color = Color(0xFF545454)
             )
 
-            Spacer(modifier = Modifier.padding(10.dp))
+            Spacer(modifier = Modifier.padding(5.dp))
 
             Text(
                 text = "Calories: ${item?.cal}",
@@ -147,6 +149,14 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                 fontSize = 18.sp,
                 color = Color(0xFF545454)
             )
+
+            Spacer(modifier = Modifier.padding(5.dp))
+
+            Text(
+                text = "Ingredients: ${item.ingr}",
+                fontFamily = FontFamily(Font(R.font.montserratreg)),
+                fontSize = 18.sp,
+            )
         }
     }
 
@@ -158,13 +168,20 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
             .padding(end = 20.dp, top = 20.dp)
     )
     {
-        Image(
-            painter = painterResource(id = item?.image!!),
-            contentDescription = "",
+        Box(
             modifier = Modifier
+                .clip(CircleShape)
                 .size(180.dp)
-                .offset(y = 15.dp)
-        )
+                .background(Color.White)
+        ) {
+            Image(
+                painter = painterResource(id = item?.image!!),
+                contentDescription = "",
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .size(180.dp)
+            )
+        }
     }
 
     Column(

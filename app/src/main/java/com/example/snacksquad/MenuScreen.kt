@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
@@ -68,7 +69,7 @@ fun MenuScreen(categoryTitle: String? = null, navController: NavController, shar
             colors.add(Color(0xFFFFC272))
             var ind = 0
 
-            items(GetFoodItems()) { item: FoodDetail ->
+            items(GetFoodItems(categoryTitle!!)) { item: FoodDetail ->
                 CreateFoodColumn(item, colors[ind], navController, sharedViewModel)
 
                 ind++
@@ -98,35 +99,15 @@ fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavContro
             modifier = Modifier
                 .padding(horizontal = 30.dp, vertical = 35.dp)
         ) {
-            Row(
-                verticalAlignment = Alignment.Top,
-                horizontalArrangement = Arrangement.Start,
-            ) {
-                Text(
-                    text = item.name,
-                    fontSize = 17.sp,
-                    fontFamily = FontFamily(Font(R.font.mottersemico)),
-                    modifier = Modifier.padding(top = 2.dp)
-                )
 
-                Spacer(modifier = Modifier.width(15.dp))
-
-                Surface(
-                    shape = RoundedCornerShape(20.dp),
-                    color = Color(0xFFFFCE80),
-                    modifier = Modifier
-                        .height(26.dp)
-                        .width(40.dp)
-                ) {
-                    Text(
-                        text = item.rating.toString(),
-                        fontFamily = FontFamily(Font(R.font.bebas_neue)),
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(top= 3.dp),
-                        fontSize = 17.sp
-                    )
-                }
-            }
+            Text(
+                text = item.name,
+                fontSize = 17.sp,
+                fontFamily = FontFamily(Font(R.font.mottersemico)),
+                modifier = Modifier
+                    .padding(top = 2.dp)
+                    .requiredWidth(160.dp)
+            )
 
             Spacer(modifier = Modifier.padding(5.dp))
             Text(
@@ -143,12 +124,42 @@ fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavContro
                 .padding(top = 30.dp, end = 25.dp)
 
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.circle),
-                contentDescription = "",
+            Surface(
+                shape = RoundedCornerShape(20.dp),
+                color = Color(0xFFFFCE80),
                 modifier = Modifier
-                    .size(80.dp)
-            )
+                    .height(26.dp)
+                    .width(40.dp)
+                    .offset(y = 5.dp)
+            ) {
+                Text(
+                    text = item.rating.toString(),
+                    fontFamily = FontFamily(Font(R.font.bebas_neue)),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(top= 3.dp),
+                    fontSize = 17.sp
+                )
+            }
+
+            Spacer(modifier = Modifier.width(15.dp))
+
+            Box(modifier = Modifier
+                .clip(CircleShape)
+                .size(80.dp)
+                .background(Color.White)
+                .clickable {
+                    sharedViewModel.addItem(newItem = item)
+                    navController.navigate(Screens.Food.route)
+                }
+            ) {
+                Image(
+                    painter = painterResource(id = item.image),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .clip(CircleShape)
+                        .size(80.dp)
+                )
+            }
 
             Spacer(modifier = Modifier.padding(5.dp))
         }

@@ -1,6 +1,7 @@
 package com.example.snacksquad
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -81,7 +82,8 @@ fun CreateActionBars(navController: NavHostController) {
                         BottomNavigationItem(
                             icon = {
                                 Box(
-                                    modifier = Modifier.size(60.dp),
+                                    modifier = Modifier
+                                        .size(60.dp),
                                     contentAlignment = Alignment.Center,
                                 ) {
                                     if (currentRoute == item.route) {
@@ -95,7 +97,7 @@ fun CreateActionBars(navController: NavHostController) {
                                         ) {
                                             Icon(
                                                 painter = painterResource(item.imgResource),
-                                                contentDescription = item.label
+                                                contentDescription = item.label,
                                             )
                                         }
                                     } else {

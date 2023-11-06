@@ -184,7 +184,7 @@ fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavContro
                 .padding(end = 30.dp, bottom = 25.dp)
         )
         {
-            val qty = remember { mutableStateOf(0) }
+            val qty = remember { mutableStateOf(Cart.cart.GetItemQty(item.name)) }
 
             Text(
                 text = "Qty",
@@ -201,7 +201,7 @@ fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavContro
                     .clickable {
                         if (qty.value > 0) {
                             qty.value--
-                            item.qty--
+                            Cart.cart.RemoveFromCart(item)
                         }
                     }
             ) {
@@ -226,7 +226,7 @@ fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavContro
                     .padding(top = 5.dp)
                     .clickable {
                         qty.value++
-                        item.qty++
+                        Cart.cart.AddToCart(item)
                     }
             ) {
                 Image(

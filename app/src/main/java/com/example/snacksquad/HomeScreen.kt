@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
@@ -31,7 +32,6 @@ import kotlin.reflect.typeOf
 
 @Composable
 fun HomeScreen(navController: NavController, sharedViewModel: SharedViewModel) {
-    //FoodItems().CreateFoodItemList()
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -40,36 +40,38 @@ fun HomeScreen(navController: NavController, sharedViewModel: SharedViewModel) {
             .fillMaxSize()
     ) {
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(3.dp)
+            verticalArrangement = Arrangement.spacedBy(3.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             item {
                 Box(
-                    modifier = Modifier.padding(start = 25.dp, top = 30.dp, bottom = 30.dp)
+                    modifier = Modifier.padding(top = 30.dp, bottom = 30.dp),
+                    contentAlignment = Alignment.Center,
                 ) {
                     Card(
                         backgroundColor = Color(0xFF40AFC2),
                         shape = RoundedCornerShape(10.dp),
                         modifier = Modifier
-                            .width(310.dp)
+                            .width(320.dp)
                             .height(70.dp)
                     ) {
-                        Row{
-                            androidx.compose.material3.Text(
+                        Row(
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically
+                        ){
+                            Text(
                                 text = "Welcome, ",
                                 fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                                 fontSize = 25.sp,
                                 color = Color.White,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier.padding(top = 18.dp, start = 27.dp)
+                                textAlign = TextAlign.Center
                             )
-                            androidx.compose.material3.Text(
+                            Text(
                                 text = "Dhanush",
                                 fontFamily = FontFamily(Font(R.font.montserrat_bold)),
                                 fontSize = 25.sp,
                                 color = Color.White,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier.padding(top = 18.dp)
+                                textAlign = TextAlign.Center
                             )
                         }
 
@@ -154,7 +156,8 @@ fun CreateCategories(item: CategoryDetail, navController: NavController, sharedV
                             fontSize = 23.sp,
                             fontFamily = FontFamily(Font(R.font.montserrat_bold)),
                             color = Color.White,
-                            modifier = Modifier.padding(top = 15.dp, start = 50.dp)
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(top = 15.dp)
                         )
                     }
 

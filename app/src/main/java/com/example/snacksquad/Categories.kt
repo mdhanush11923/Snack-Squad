@@ -4,6 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
@@ -35,28 +37,6 @@ fun GetSnackOfTheDay(): FoodDetail {
     return snack
 }
 
-/*
-fun GetFoodItems(category: String = "All Snacks", expanded: Boolean = false): MutableList<FoodDetail> {
-    val extra =
-        if (expanded)
-            10
-        else
-            0
-
-    if (category == "Popular") {
-        return food
-        //return food.subList(5,11+extra)
-    } else if (category == "Favorite") {
-        return food
-        //return food.subList(20,26+extra)
-    } else {
-        if (expanded)
-            return food
-        else
-            return food
-    }
-}
-*/
 
 fun GetFoodItems(categoryTitle: String = ""): MutableList<FoodDetail> {
     val food = mutableListOf<FoodDetail>()

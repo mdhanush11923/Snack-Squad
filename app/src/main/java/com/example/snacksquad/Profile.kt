@@ -78,8 +78,10 @@ fun ProfileScreen(navController: NavController) {
                     .padding(80.dp, 30.dp, 80.dp, 0.dp),
                     contentAlignment = Center
                 ) {
-                    Column(modifier = Modifier.fillMaxSize()) {
-
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.fillMaxSize()
+                    ) {
                         Box(
                             modifier = Modifier
                             .clip(CircleShape)

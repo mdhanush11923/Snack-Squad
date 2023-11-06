@@ -206,7 +206,7 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                 modifier = Modifier
                     .padding(start = 50.dp, end = 20.dp)
             ) {
-                val qty = remember { mutableStateOf(item?.qty!!) }
+                val qty = remember { mutableStateOf(Cart.cart.GetItemQty(item?.name!!)) }
 
                 Text(
                     text = "Quantity",
@@ -221,8 +221,10 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                         .size(30.dp),
                     onClick = {
                         if (qty.value > 0) {
-                            qty.value--;
-                            item?.qty = qty.value
+                            qty.value--
+                            if (item != null) {
+                                Cart.cart.RemoveFromCart(item)
+                            }
                         }
                     },
                     contentPadding = PaddingValues(0.dp)
@@ -249,7 +251,9 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                         .size(30.dp),
                     onClick = {
                         qty.value++
-                        item?.qty = qty.value
+                        if (item != null) {
+                            Cart.cart.AddToCart(item)
+                        }
                     },
                     contentPadding = PaddingValues(0.dp)
                 ) {
@@ -271,7 +275,7 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                         .height(50.dp)
                         .width(80.dp)
                         .clickable {
-
+                            navController.navigate(Screens.Cart.route)
                         }
                 ) {
                     Image(

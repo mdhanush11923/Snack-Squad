@@ -40,7 +40,7 @@ fun SetupNavGraph(
     ) {
 
         composable(route = Screens.Opening.route) {
-          SetStatusBarColor(color = Color(0xFFFFF48F))
+            SetStatusBarColor(color = Color(0xFFFFF48F))
             HomeScreen(navController = navController, sharedViewModel = sharedViewModel)
 
         }
@@ -86,7 +86,8 @@ fun SetupNavGraph(
         }
 
         composable(route = Screens.Cart.route) {
-            Text("Tab 3 Content", modifier = Modifier.fillMaxSize())
+            SetStatusBarColor(color = Color(0xFFFFF48F))
+            CartScreen()
         }
 
         composable(route = Screens.Profile.route) {
@@ -96,5 +97,6 @@ fun SetupNavGraph(
         composable(route = Screens.Blank.route) {
             Text("Tab 3 Content", modifier = Modifier.fillMaxSize())
         }
+
     }
 }

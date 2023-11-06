@@ -253,15 +253,15 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                     modifier = Modifier
                         .height(50.dp)
                         .width(80.dp)
+                        .clickable {
+
+                        }
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.cart),
                         contentDescription = "",
                         modifier = Modifier
                             .requiredSize(30.dp)
-                            .clickable {
-
-                            }
                     )
                 }
             }

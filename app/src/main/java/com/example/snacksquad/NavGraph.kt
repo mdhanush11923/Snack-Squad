@@ -20,27 +20,27 @@ fun SetupNavGraph(
         startDestination = Screens.Profile.route
     ) {
         composable(route = Screens.Opening.route) {
-            HomeScreen(navController = navController)
+            HomeScreen(navController = navController, sharedViewModel = sharedViewModel)
         }
 
         composable(route = Screens.Registration1.route) {
-            HomeScreen(navController = navController)
+            HomeScreen(navController = navController, sharedViewModel = sharedViewModel)
         }
 
         composable(route = Screens.Registration2.route) {
-            HomeScreen(navController = navController)
+            HomeScreen(navController = navController, sharedViewModel = sharedViewModel)
         }
 
         composable(route = Screens.Registration3.route) {
-            HomeScreen(navController = navController)
+            HomeScreen(navController = navController, sharedViewModel = sharedViewModel)
         }
 
         composable(route = Screens.Registration4.route) {
-            HomeScreen(navController = navController)
+            HomeScreen(navController = navController, sharedViewModel = sharedViewModel)
         }
 
         composable(route = Screens.Home.route) {
-            HomeScreen(navController = navController)
+            HomeScreen(navController = navController, sharedViewModel = sharedViewModel)
         }
 
         composable(route = "${Screens.Menu.route}/{categoryTitle}") {

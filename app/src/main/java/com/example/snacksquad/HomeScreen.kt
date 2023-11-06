@@ -2,6 +2,7 @@ package com.example.snacksquad
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -12,6 +13,8 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,7 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, sharedViewModel: SharedViewModel) {
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -73,7 +76,7 @@ fun HomeScreen(navController: NavController) {
             verticalArrangement = Arrangement.spacedBy(3.dp)
         ) {
             items(GetCategories()) { item: CategoryDetail ->
-                CreateCategories(item, navController)
+                CreateCategories(item, navController, sharedViewModel)
                 //CreateCategories(title = item.title, boxColor = item.boxColor, subBoxColor = item.subBoxColor, route = item.route, navController)
             }
 
@@ -85,7 +88,7 @@ fun HomeScreen(navController: NavController) {
 }
 
 @Composable
-fun CreateCategories(item: CategoryDetail, navController: NavController) {
+fun CreateCategories(item: CategoryDetail, navController: NavController, sharedViewModel: SharedViewModel) {
     Surface(
         color = item.boxColor,
         modifier = Modifier
@@ -138,7 +141,6 @@ fun CreateCategories(item: CategoryDetail, navController: NavController) {
                     }
 
                 }
-
                 else {
                     Card(
                         backgroundColor = item.subBoxColor,
@@ -169,10 +171,15 @@ fun CreateCategories(item: CategoryDetail, navController: NavController) {
                     }
                 }
             } else {
+                val snackOfTheDay = remember { GetSnackOfTheDay() }
                 Box(modifier = Modifier
                     .clip(CircleShape)
                     .size(120.dp)
                     .background(Color.White)
+                    .clickable {
+                        sharedViewModel.addItem(newItem = snackOfTheDay)
+                        navController.navigate(Screens.Food.route)
+                    }
                 ) {
 
                 }
@@ -180,7 +187,7 @@ fun CreateCategories(item: CategoryDetail, navController: NavController) {
                 Spacer(modifier = Modifier.padding(5.dp))
 
                 Text(
-                    text = "Gingerbread",
+                    text = snackOfTheDay.name,
                     fontSize = 18.sp,
                     fontFamily = FontFamily(Font(R.font.mottersemico))
                 )

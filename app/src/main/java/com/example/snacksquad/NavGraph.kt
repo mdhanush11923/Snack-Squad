@@ -100,6 +100,5 @@ fun SetupNavGraph(
         composable(route = Screens.Blank.route) {
             Text("No Content", modifier = Modifier.fillMaxSize())
         }
-
     }
 }

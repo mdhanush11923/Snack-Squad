@@ -502,7 +502,7 @@ fun ProfileScreen(navController: NavController) {
                                                 if (address2.isNotEmpty()) {
                                                     if (address3.isNotEmpty()) {
 
-                                                        navController.navigate(route = Screens.Blank.route)
+                                                        navController.navigate(route = Screens.Home.route)
 
                                                     }
                                                     else {

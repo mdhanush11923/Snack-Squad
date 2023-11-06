@@ -69,7 +69,9 @@ fun SetupNavGraph(
         }
 
         composable(route = Screens.Home.route) {
+            SetStatusBarColor(color = Color(0xFFFFF48F))
             HomeScreen(navController = navController, sharedViewModel = sharedViewModel)
+
         }
 
         composable(route = "${Screens.Menu.route}/{categoryTitle}") {

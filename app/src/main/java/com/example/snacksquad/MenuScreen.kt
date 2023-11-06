@@ -28,6 +28,11 @@ import com.example.snacksquad.R
 
 @Composable
 fun MenuScreen(categoryTitle: String? = null, navController: NavController, sharedViewModel: SharedViewModel) {
+    val colors = mutableListOf<Color>()
+    colors.add(Color(0xFFC1FF72))
+    colors.add(Color(0xFFECABFF))
+    colors.add(Color(0xFFFFC272))
+    var ind = 0
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -63,11 +68,6 @@ fun MenuScreen(categoryTitle: String? = null, navController: NavController, shar
             ),
             verticalArrangement = Arrangement.spacedBy(3.dp)
         ) {
-            val colors = mutableListOf<Color>()
-            colors.add(Color(0xFFC1FF72))
-            colors.add(Color(0xFFECABFF))
-            colors.add(Color(0xFFFFC272))
-            var ind = 0
 
             items(GetFoodItems(categoryTitle!!)) { item: FoodDetail ->
                 CreateFoodColumn(item, colors[ind], navController, sharedViewModel)

@@ -12,8 +12,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,6 +29,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -34,37 +37,40 @@ import androidx.navigation.NavController
 @Composable
 fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
     val item = sharedViewModel.item
-    Column(
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.Start,
+    Box(
         modifier = Modifier
-            .background(Color(0xFFFFF48F))
-            .fillMaxSize()
-            .padding(start = 20.dp, end = 20.dp, top = 20.dp)
     ) {
-        Row(
-            horizontalArrangement = Arrangement.Start,
-            verticalAlignment = Alignment.CenterVertically,
+        Column(
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.Start,
             modifier = Modifier
-                .fillMaxWidth()
+                .background(Color(0xFFFFF48F))
+                .fillMaxSize()
+                .padding(start = 20.dp, end = 20.dp, top = 20.dp)
         ) {
-            Button(
-                shape = CircleShape,
-                modifier = Modifier.size(50.dp),
-                colors = ButtonDefaults.buttonColors(Color.Black),
-                onClick = { navController.popBackStack() },
-                contentPadding = PaddingValues(0.dp)
+            Row(
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
             ) {
-                Icon(
-                    Icons.Default.ArrowBack,
-                    contentDescription = "",
-                    tint = Color.White,
-                    modifier = Modifier.size(30.dp)
-                )
+                Button(
+                    shape = CircleShape,
+                    modifier = Modifier.size(50.dp),
+                    colors = ButtonDefaults.buttonColors(Color.Black),
+                    onClick = { navController.popBackStack() },
+                    contentPadding = PaddingValues(0.dp)
+                ) {
+                    Icon(
+                        Icons.Default.ArrowBack,
+                        contentDescription = "",
+                        tint = Color.White,
+                        modifier = Modifier.size(30.dp)
+                    )
+                }
             }
-        }
 
-        Spacer(modifier = Modifier.padding(10.dp))
+            Spacer(modifier = Modifier.padding(10.dp))
 
         Surface(
             color = Color(0xFF53DEE8),
@@ -87,78 +93,100 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                         .requiredWidth(160.dp)
                 )
 
-                Spacer(modifier = Modifier.padding(7.dp))
+                    Spacer(modifier = Modifier.padding(7.dp))
 
-                Surface(
-                    shape = CircleShape,
-                    color = Color(0xFFFFCE80),
-                    modifier = Modifier
-                        .height(28.dp)
-                        .width(40.dp)
-                        .offset(y = 1.dp)
-                ) {
+                    Surface(
+                        shape = CircleShape,
+                        color = Color(0xFFFFCE80),
+                        modifier = Modifier
+                            .height(28.dp)
+                            .width(40.dp)
+                            .offset(y = 1.dp)
+                    ) {
+                        Text(
+                            text = item.rating.toString(),
+                            fontFamily = FontFamily(Font(R.font.montserratreg)),
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.offset(y = 3.dp)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.padding(7.dp))
+
                     Text(
-                        text = item.rating.toString(),
-                        fontFamily = FontFamily(Font(R.font.montserratreg)),
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.offset(y = 3.dp)
+                        text = "$${item.price}",
+                        fontSize = 20.sp,
+                        fontFamily = FontFamily(Font(R.font.montserratreg))
                     )
                 }
-
-                Spacer(modifier = Modifier.padding(7.dp))
+            }
+            Column(
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier
+                    .requiredWidth(450.dp)
+                    .height(520.dp)
+                    .background(Color(0xFF5CE1E6))
+                    .padding(start = 65.dp, end = 65.dp, bottom = 55.dp)
+                    .verticalScroll(rememberScrollState())
+            ) {
+                Spacer(modifier = Modifier.padding(10.dp))
 
                 Text(
-                    text = "$${item.price}",
-                    fontSize = 20.sp,
-                    fontFamily = FontFamily(Font(R.font.montserratreg))
+                    text = "Details",
+                    fontFamily = FontFamily(Font(R.font.montserratreg)),
+                    fontSize = 15.sp,
+                    color = Color(0xFF545454)
+                )
+
+            Spacer(modifier = Modifier.padding(5.dp))
+
+                Text(
+                    text = "Calories: ${item?.cal}",
+                    fontFamily = FontFamily(Font(R.font.montserratreg)),
+                    fontSize = 18.sp,
+                )
+
+                Spacer(modifier = Modifier.padding(5.dp))
+
+                var seeMore by remember { mutableStateOf(true) }
+
+                Text(
+                    text = item?.desc!!,
+                    fontFamily = FontFamily(Font(R.font.montserratreg)),
+                    fontSize = 16.sp,
+                    color = Color(0xFF545454),
+                    maxLines = if (seeMore) 1 else Int.MAX_VALUE,
+                    overflow = TextOverflow.Ellipsis
+
+                )
+                val textButton = if (seeMore) {
+                    "See More"
+                } else {
+                    "See Less"
+                }
+                Text(
+                    text = textButton,
+                    textAlign = TextAlign.Center,
+                    color = Color.Black,
+                    fontFamily = FontFamily(Font(R.font.montserrat_bold)),
+                    modifier = Modifier
+                        .heightIn(20.dp)
+                        .fillMaxWidth()
+                        .padding(top = 15.dp)
+                        .clickable {
+                            seeMore = !seeMore
+                        }
+                )
+                Spacer(modifier = Modifier.padding(5.dp))
+
+                Text(
+                    text = "Ingredients: ${item.ingr}",
+                    fontFamily = FontFamily(Font(R.font.montserratreg)),
+                    fontSize = 18.sp,
                 )
             }
         }
-        Column(
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.Start,
-            modifier = Modifier
-                .requiredWidth(450.dp)
-                .height(520.dp)
-                .background(Color(0xFF5CE1E6))
-                .padding(start = 65.dp, end = 65.dp, bottom = 55.dp)
-                .verticalScroll(rememberScrollState())
-        ) {
-            Spacer(modifier = Modifier.padding(10.dp))
-
-            Text(
-                text = "Details",
-                fontFamily = FontFamily(Font(R.font.montserratreg)),
-                fontSize = 15.sp,
-                color = Color(0xFF545454)
-            )
-
-            Spacer(modifier = Modifier.padding(5.dp))
-
-            Text(
-                text = "Calories: ${item?.cal}",
-                fontFamily = FontFamily(Font(R.font.montserratreg)),
-                fontSize = 18.sp,
-            )
-
-            Spacer(modifier = Modifier.padding(5.dp))
-
-            Text(
-                text = item?.desc!!,
-                fontFamily = FontFamily(Font(R.font.montserratreg)),
-                fontSize = 18.sp,
-                color = Color(0xFF545454)
-            )
-
-            Spacer(modifier = Modifier.padding(5.dp))
-
-            Text(
-                text = "Ingredients: ${item.ingr}",
-                fontFamily = FontFamily(Font(R.font.montserratreg)),
-                fontSize = 18.sp,
-            )
-        }
-    }
 
     Row(
         horizontalArrangement = Arrangement.End,
@@ -184,106 +212,91 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
         }
     }
 
-    Column(
-        verticalArrangement = Arrangement.Bottom,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = Color.Transparent)
-            .padding(bottom = 20.dp)
-    ) {
-        Surface(
-            shape = RoundedCornerShape(40.dp),
+        Column(
+            verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .height(70.dp)
-                .width(350.dp),
-            color = Color.White,
-            border = BorderStroke(2.dp, Color.Black)
+                .fillMaxSize()
+                .background(color = Color.Transparent)
+                .padding(20.dp, 0.dp, 20.dp, 20.dp)
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceAround,
+            Surface(
+                shape = RoundedCornerShape(40.dp),
                 modifier = Modifier
-                    .padding(start = 50.dp, end = 20.dp)
+                    .height(70.dp)
+                    .width(350.dp),
+                color = Color.White,
+                border = BorderStroke(2.dp, Color.Black)
             ) {
-                val qty = remember { mutableStateOf(Cart.cart.GetItemQty(item?.name!!)) }
-
-                Text(
-                    text = "Quantity",
-                    fontFamily = FontFamily(Font(R.font.montserratreg)),
-                    fontSize = 15.sp,
-                )
-
-                Button(
-                    shape = CircleShape,
-                    colors = ButtonDefaults.buttonColors(Color.Black),
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceAround,
                     modifier = Modifier
-                        .size(30.dp),
-                    onClick = {
-                        if (qty.value > 0) {
-                            qty.value--
-                            if (item != null) {
-                                Cart.cart.RemoveFromCart(item)
-                            }
-                        }
-                    },
-                    contentPadding = PaddingValues(0.dp)
+                        .padding(start = 50.dp, end = 10.dp)
                 ) {
+                    val qty = remember { mutableStateOf(item?.qty!!) }
+
                     Text(
-                        text = "-",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Start,
-                        color = Color.White
+                        text = "Quantity",
+                        fontFamily = FontFamily(Font(R.font.montserratreg)),
+                        fontSize = 15.sp,
                     )
-                }
 
-                Text(
-                    text = qty.value.toString(),
-                    fontSize = 15.sp,
-                    fontFamily = FontFamily(Font(R.font.montserratreg))
-                )
-
-                Button(
-                    shape = CircleShape,
-                    colors = ButtonDefaults.buttonColors(Color.Black),
-                    modifier = Modifier
-                        .size(30.dp),
-                    onClick = {
-                        qty.value++
-                        if (item != null) {
-                            Cart.cart.AddToCart(item)
-                        }
-                    },
-                    contentPadding = PaddingValues(0.dp)
-                ) {
-                    Text(
-                        text = "+",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Start,
-                        color = Color.White
-                    )
-                }
-
-                Spacer(modifier = Modifier.width(5.dp))
-
-                Surface(
-                    shape = RoundedCornerShape(30.dp),
-                    color = Color(0xFFFFCE80),
-                    modifier = Modifier
-                        .height(50.dp)
-                        .width(80.dp)
-                        .clickable {
-                            navController.navigate(Screens.Cart.route)
-                        }
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.cart),
-                        contentDescription = "",
+                    Box(
                         modifier = Modifier
-                            .requiredSize(30.dp)
+                            .size(25.dp)
+                            .clickable {
+                                if (qty.value > 0) {
+                                    qty.value--;
+                                    item?.qty = qty.value
+                                }
+                            }
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.minus),
+                            contentDescription = ""
+                        )
+                    }
+
+                    Text(
+                        text = qty.value.toString(),
+                        fontSize = 15.sp,
+                        fontFamily = FontFamily(Font(R.font.montserratreg))
                     )
+
+                    Box(
+                        modifier = Modifier
+                            .size(25.dp)
+                            .clickable {
+                                qty.value++
+                                item?.qty = qty.value
+                            }
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.add),
+                            contentDescription = ""
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.width(5.dp))
+
+                    Surface(
+                        shape = RoundedCornerShape(30.dp),
+                        color = Color(0xFFFFCE80),
+                        modifier = Modifier
+                            .height(50.dp)
+                            .width(80.dp)
+                            .clickable {
+
+                            }
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.cart),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .requiredSize(30.dp)
+                        )
+                    }
                 }
             }
         }

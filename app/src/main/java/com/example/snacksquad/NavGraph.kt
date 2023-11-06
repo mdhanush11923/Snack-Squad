@@ -55,11 +55,11 @@ fun SetupNavGraph(
         }
 
         composable(route = Screens.Registration3.route) {
-            HomeScreen(navController = navController)
+            RegistrationScreen3(navController = navController)
         }
 
         composable(route = Screens.Registration4.route) {
-            HomeScreen(navController = navController)
+            RegistrationScreen4(navController = navController)
         }
 
         composable(route = Screens.Home.route) {

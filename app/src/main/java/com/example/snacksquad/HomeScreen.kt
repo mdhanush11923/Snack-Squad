@@ -167,7 +167,7 @@ fun CreateCategories(item: CategoryDetail, navController: NavController, sharedV
                     horizontalArrangement = Arrangement.spacedBy(30.dp)
                 ) {
                     items(GetFoodItems()) { item: FoodDetail ->
-                        CreateFoodRow(item = item)
+                        CreateFoodRow(item = item, navController = navController, sharedViewModel = sharedViewModel)
                     }
                 }
             } else {
@@ -201,7 +201,7 @@ fun CreateCategories(item: CategoryDetail, navController: NavController, sharedV
 
 
 @Composable
-fun CreateFoodRow(item: FoodDetail) {
+fun CreateFoodRow(item: FoodDetail, navController: NavController, sharedViewModel: SharedViewModel) {
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -212,6 +212,10 @@ fun CreateFoodRow(item: FoodDetail) {
             .clip(CircleShape)
             .size(120.dp)
             .background(Color.White)
+            .clickable {
+                sharedViewModel.addItem(newItem = item)
+                navController.navigate(Screens.Food.route)
+            }
         ) {
             Image(
                 painter = painterResource(id = item.image),

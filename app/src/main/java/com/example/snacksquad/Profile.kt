@@ -46,19 +46,19 @@ import androidx.navigation.NavController
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(navController: NavController) {
-    var firstName by remember { mutableStateOf("") }
+    var firstName by remember { mutableStateOf(User.user.firstName) }
     var isErrorInFistname = false
-    var lastName by remember { mutableStateOf("") }
+    var lastName by remember { mutableStateOf(User.user.lastName) }
     var isErrorInLastname = false
-    var emailId by remember { mutableStateOf("") }
+    var emailId by remember { mutableStateOf(User.user.emailId) }
     var isErrorInEmailId = false
-    var password by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf(User.user.password) }
     var isErrorInPassword = false
-    var address1 by remember { mutableStateOf("") }
+    var address1 by remember { mutableStateOf(User.user.city) }
     var isErrorInAddress1 = false
-    var address2 by remember { mutableStateOf("") }
+    var address2 by remember { mutableStateOf(User.user.street) }
     var isErrorInAddress2 = false
-    var address3 by remember { mutableStateOf("") }
+    var address3 by remember { mutableStateOf(User.user.floor) }
     var isErrorInAddress3 = false
     var fieldShape = RoundedCornerShape(10.dp)
 
@@ -90,7 +90,7 @@ fun ProfileScreen(navController: NavController) {
                             contentAlignment = Center
                         ) {
                             Text(
-                                text = "D",
+                                text = User.user.firstName[0].toString().uppercase(),
                                 fontSize = 100.sp,
                                 fontFamily = FontFamily(
                                     Font(R.font.mottersemico)

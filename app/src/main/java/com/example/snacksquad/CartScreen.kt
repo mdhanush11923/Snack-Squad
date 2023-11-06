@@ -60,9 +60,9 @@ fun CartScreen() {
                 .height(60.dp),
         ) {
             Text(
-                text = "Delivery to 1600 Amphitheater Way",
+                text = "Delivery to ${User.user.city}, ${User.user.street} ${User.user.floor}",
                 fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
-                fontSize = 12.sp,
+                fontSize = 13.sp,
                 modifier = Modifier
                     .padding(top = 20.dp, start = 15.dp)
             )

@@ -67,7 +67,7 @@ fun HomeScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                                 textAlign = TextAlign.Center
                             )
                             Text(
-                                text = "Dhanush",
+                                text = User.user.firstName,
                                 fontFamily = FontFamily(Font(R.font.montserrat_bold)),
                                 fontSize = 25.sp,
                                 color = Color.White,

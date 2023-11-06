@@ -1,5 +1,6 @@
 package com.example.snacksquad
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -64,7 +65,8 @@ fun MenuScreen(categoryTitle: String? = null, navController: NavController, shar
             contentPadding = PaddingValues(
                 start = 10.dp,
                 end = 10.dp,
-                top = 10.dp
+                top = 10.dp,
+                bottom = 80.dp
             ),
             verticalArrangement = Arrangement.spacedBy(3.dp)
         ) {
@@ -76,6 +78,31 @@ fun MenuScreen(categoryTitle: String? = null, navController: NavController, shar
                 if (ind > 2)
                     ind = 0
             }
+        }
+    }
+    Column(
+        verticalArrangement = Arrangement.Bottom,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = 20.dp)
+    ) {
+        Surface(
+            shape = RoundedCornerShape(30.dp),
+            color = Color(0xFFFFCE80),
+            modifier = Modifier
+                .size(80.dp)
+                .clickable {
+                    navController.navigate(Screens.Cart.route)
+                },
+            border = BorderStroke(3.dp, Color.Black)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.cart),
+                contentDescription = "",
+                modifier = Modifier
+                    .requiredSize(30.dp)
+            )
         }
     }
 }
@@ -235,7 +262,6 @@ fun CreateFoodColumn(item: FoodDetail, boxColor: Color, navController: NavContro
                 )
             }
         }
-
     }
     Spacer(modifier = Modifier.padding(15.dp))
 }

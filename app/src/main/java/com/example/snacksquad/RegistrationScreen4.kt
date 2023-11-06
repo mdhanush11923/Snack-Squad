@@ -49,14 +49,6 @@ import androidx.navigation.NavController
 @Composable
 fun RegistrationScreen4(navController: NavController) {
     val registrationPageColor = Color(0xffFFC85F)
-    var firstName by remember { mutableStateOf("") }
-    var isErrorInFistname = false
-    var lastName by remember { mutableStateOf("") }
-    var isErrorInLastname = false
-    var emailId by remember { mutableStateOf("") }
-    var isErrorInEmailId = false
-    var password by remember { mutableStateOf("") }
-    var isErrorInPassword = false
     var fieldShape = RoundedCornerShape(10.dp)
     var categoryNameStartPadding = 15.dp
     var categoryNameFontFamily = FontFamily(
@@ -86,7 +78,7 @@ fun RegistrationScreen4(navController: NavController) {
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
-                        text = "1/4",
+                        text = "4/4",
                         textAlign = TextAlign.Center,
                         fontSize = 16.sp,
                         color = Color.Black,
@@ -94,14 +86,35 @@ fun RegistrationScreen4(navController: NavController) {
                     )
                 }
 
-                Text(
-                    text = "The start is a piece of cake!",
-                    textAlign = TextAlign.Center,
-                    fontFamily = FontFamily(Font(R.font.mottersemico)),
-                    fontSize = 22.sp,
-                    color = Color(0xff6E4942),
-                    modifier = Modifier.padding(horizontal = 30.dp)
-                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(
+                        text = "Ready to Snack!",
+                        textAlign = TextAlign.Center,
+                        fontFamily = FontFamily(Font(R.font.mottersemico)),
+                        fontSize = 22.sp,
+                        color = Color(0xff6E4942),
+                        modifier = Modifier.padding(horizontal = 30.dp)
+                    )
+                }
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(
+                        text = "Grab your pie",
+                        textAlign = TextAlign.Center,
+                        fontFamily = FontFamily(Font(R.font.montserrat_light)),
+                        fontSize = 22.sp,
+                        color = Color(0xff6E4942),
+                        modifier = Modifier.padding(horizontal = 30.dp)
+                    )
+                }
 
                 Box(modifier = Modifier
                     .height(200.dp)
@@ -109,7 +122,7 @@ fun RegistrationScreen4(navController: NavController) {
                     .padding(horizontal = 50.dp)
                 ){// Pie Container
                     Image(
-                        painter = painterResource(id = R.drawable.piepiece1),
+                        painter = painterResource(id = R.drawable.piepiece4),
                         contentDescription = "Pie Image",
                         modifier = Modifier
                             .fillMaxSize()
@@ -130,220 +143,28 @@ fun RegistrationScreen4(navController: NavController) {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(20.dp, 30.dp, 20.dp, 0.dp),
+                            .padding(30.dp, 70.dp, 30.dp, 0.dp),
                         verticalArrangement = Arrangement.spacedBy(5.dp)
                     ) {
                         Box(
                             modifier = Modifier
-                                .fillMaxWidth(),
+                                .fillMaxWidth()
+                                .padding(vertical = 20.dp),
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = "Create Profile",
+                                text = "You're all set to explore snacks with Snack Squad!",
                                 textAlign = TextAlign.Center,
                                 fontFamily = FontFamily(Font(R.font.mottersemico)),
-                                fontSize = 22.sp,
+                                fontSize = 25.sp,
                                 color = Color(0xff6E4942),
                             )
                         }
 
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-
-                        ) {
-
-                            Column(modifier = Modifier
-                                .width(140.dp)
-                            ) {
-
-                                Column {
-                                    OutlinedTextField(
-                                        value = firstName,
-
-                                        onValueChange = {
-                                            firstName = it
-                                            isErrorInFistname = it.isEmpty()
-                                        },
-
-                                        shape = fieldShape,
-
-                                        label = { Text(text = "Firstname") },
-
-                                        modifier = Modifier
-                                            .align(alignment = Alignment.CenterHorizontally)
-                                            .fillMaxWidth(),
-
-                                        textStyle = TextStyle(
-                                            fontFamily = FontFamily(
-                                                Font(R.font.montserrat_semibold)
-                                            )
-                                        ),
-
-                                        colors = TextFieldDefaults.textFieldColors(
-                                            containerColor = Color(0xFFF5F5F5),
-                                            cursorColor = Color.Black,
-                                            focusedIndicatorColor = Color.Black,
-                                            focusedLabelColor = Color.Black
-                                        ),
-
-                                        supportingText = {
-                                            if (isErrorInFistname) {
-                                                Text(text = "Fill it")
-                                            }
-                                        },
-
-                                        isError = isErrorInFistname
-                                    )
-
-
-                                }
-                            }
-
-                            Column(modifier = Modifier
-                                .width(140.dp)
-                            ) {
-
-                                Column {
-
-                                    OutlinedTextField(
-                                        value = lastName,
-
-                                        onValueChange = {
-                                            lastName = it
-                                            isErrorInLastname = it.isEmpty()
-                                        },
-
-                                        shape = fieldShape,
-
-                                        label = { Text(text = "Lastname") },
-
-                                        modifier = Modifier
-                                            .align(alignment = Alignment.CenterHorizontally)
-                                            .fillMaxWidth(),
-
-                                        textStyle = TextStyle(
-                                            fontFamily = FontFamily(
-                                                Font(R.font.montserrat_semibold)
-                                            )
-                                        ),
-
-                                        colors = TextFieldDefaults.textFieldColors(
-                                            containerColor = Color(0xFFF5F5F5),
-                                            cursorColor = Color.Black,
-                                            focusedIndicatorColor = Color.Black,
-                                            focusedLabelColor = Color.Black
-                                        ),
-
-                                        supportingText = {
-                                            if (isErrorInLastname) {
-                                                Text(text = "Fill it")
-                                            }
-                                        },
-
-                                        isError = isErrorInLastname
-                                    )
-
-
-                                }
-
-                            }
-
-                        }
-
-                        Column {
-
-                            OutlinedTextField(
-                                value = emailId,
-
-                                onValueChange = {
-                                    emailId = it
-                                    isErrorInEmailId = it.isEmpty()
-                                },
-
-                                label = { Text(text = "Email Id") },
-
-                                shape = fieldShape,
-
-                                modifier = Modifier
-                                    .align(alignment = Alignment.CenterHorizontally)
-                                    .fillMaxWidth(),
-
-                                textStyle = TextStyle(
-                                    fontFamily = FontFamily(
-                                        Font(R.font.montserrat_semibold)
-                                    )
-                                ),
-
-                                colors = TextFieldDefaults.textFieldColors(
-                                    containerColor = Color(0xFFF5F5F5),
-                                    cursorColor = Color.Black,
-                                    focusedIndicatorColor = Color.Black,
-                                    focusedLabelColor = Color.Black
-                                ),
-
-                                supportingText = {
-                                    if (isErrorInEmailId) {
-                                        Text(text = "Fill it")
-                                    }
-                                },
-
-                                isError = isErrorInEmailId
-                            )
-
-
-                        }
-
-                        Column {
-
-                            OutlinedTextField(
-                                value = password,
-
-                                visualTransformation = PasswordVisualTransformation(),
-
-                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-
-                                onValueChange = {
-                                    password = it
-                                    isErrorInPassword = it.isEmpty()
-                                },
-
-                                label = { Text(text = "Password") },
-
-                                shape = fieldShape,
-
-                                modifier = Modifier
-                                    .align(alignment = Alignment.CenterHorizontally)
-                                    .fillMaxWidth(),
-
-                                textStyle = TextStyle(
-                                    fontFamily = FontFamily(
-                                        Font(R.font.montserrat_semibold)
-                                    )
-                                ),
-
-                                colors = TextFieldDefaults.textFieldColors(
-                                    containerColor = Color(0xFFF5F5F5),
-                                    cursorColor = Color.Black,
-                                    focusedIndicatorColor = Color.Black,
-                                    focusedLabelColor = Color.Black
-                                ),
-
-                                supportingText = {
-                                    if (isErrorInPassword) {
-                                        Text(text = "Fill it")
-                                    }
-                                },
-
-                                isError = isErrorInPassword
-                            )
-                        }
-
-                        Box(modifier = Modifier.padding(top = 10.dp)) {
+                        Box(modifier = Modifier.padding(vertical = 10.dp)) {
                             Button(
                                 onClick = {
-                                    navController.navigate(route = Screens.Registration2.route)
+                                    navController.navigate(route = Screens.Home.route)
                                 },
                                 shape = RoundedCornerShape(25.dp),
                                 modifier = Modifier
@@ -351,14 +172,14 @@ fun RegistrationScreen4(navController: NavController) {
                                     .fillMaxWidth()
                                     .height(70.dp),
                                 colors = ButtonDefaults.outlinedButtonColors(
-                                    containerColor = Color(0xff5CE1E6),
-                                    contentColor = Color.Black
+                                    containerColor = Color(0xffFF578E),
+                                    contentColor = Color.White
                                 ),
                                 border = BorderStroke(width = 2.dp, color = Color.Black)
 
                             ) {
                                 Text(
-                                    text = "Get Started",
+                                    text = "Start Snacking",
                                     fontFamily = FontFamily(
                                         Font(R.font.montserrat_bold)
                                     ),

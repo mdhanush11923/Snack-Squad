@@ -33,13 +33,13 @@ fun MenuScreen(categoryTitle: String? = null, navController: NavController, shar
         modifier = Modifier
             .background(Color(0xFFFFF48F))
             .fillMaxSize()
-            .padding(top = 40.dp)
+            .padding(10.dp,40.dp,10.dp,0.dp)
     ) {
         Card(
             backgroundColor = Color(0xFFFF578E),
             shape = RoundedCornerShape(10.dp),
             modifier = Modifier
-                .width(310.dp)
+                .width(320.dp)
                 .height(70.dp)
         ) {
             Text(

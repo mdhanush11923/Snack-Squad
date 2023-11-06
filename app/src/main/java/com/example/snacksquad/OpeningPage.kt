@@ -1,5 +1,6 @@
 package com.example.snacksquad
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,17 +24,22 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun OpeningPage() {
+fun OpeningScreen(navController: NavController) {
+    val openingPageColor = Color(0xff53DEE8)
+
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xff53DEE8))
-            .padding(20.dp)
+            .background(openingPageColor)
+            .padding(15.dp, 20.dp, 15.dp, 20.dp)
     ) {
         Box(
             modifier = Modifier
@@ -41,10 +48,12 @@ fun OpeningPage() {
                 .background(Color.White)
         ) {
             Column {
-                Box(modifier = Modifier
-                    .height(200.dp)
-                    .fillMaxWidth()
-                    .padding(20.dp, 30.dp, 20.dp, 0.dp)) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 35.dp, start = 5.dp),
+                    contentAlignment = Alignment.Center
+                ) {
                     Image(
                         painter = painterResource(id = R.drawable.snackk),
                         contentDescription = "Top Image",
@@ -61,7 +70,8 @@ fun OpeningPage() {
                     Text(
                         text = "A Customizable Snack Ordering And Delivery App",
                         textAlign = TextAlign.Center,
-                        fontSize = 18.sp
+                        fontFamily = FontFamily(Font(R.font.montserrat_light)),
+                        fontSize = 16.sp
                     )
                 }
 
@@ -75,14 +85,14 @@ fun OpeningPage() {
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(150.dp)
+                                    .height(120.dp)
                             ) { // Its Top
                             }
                             Box(
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .clip(RoundedCornerShape(20.dp))
-                                    .background(Color(0xff53DEE8))
+                                    .background(openingPageColor)
                             ) { // Its Bottom
 
                             }
@@ -94,7 +104,7 @@ fun OpeningPage() {
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(250.dp)
+                                    .height(230.dp)
                             ) { // Its Top
                                 Image(
                                     painter = painterResource(id = R.drawable.cookie),
@@ -116,23 +126,57 @@ fun OpeningPage() {
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(150.dp)
+                                    .height(120.dp)
                             ) { // Its Top
                             }
                             Box(
                                 modifier = Modifier
                                     .fillMaxSize()
-                                    .clip(RoundedCornerShape(20.dp))
-                                    .background(color = Color(0xff53DEE8).copy(alpha = 0.6f))
-                                    .padding(20.dp, 20.dp, 20.dp, 40.dp),
+                                    .clip(RoundedCornerShape(30.dp))
+                                    .padding(horizontal = 10.dp)
+                                    .background(color = openingPageColor.copy(alpha = 0.6f)),
                                 contentAlignment = Alignment.BottomCenter
                             ) { // Its Bottom
                                 Button(
-                                    onClick = { /*TODO*/ },
-                                    modifier = Modifier.fillMaxWidth()
-                                ) {
+                                    onClick= {
+                                        navController.navigate(route = Screens.Registration1.route)
+                                    },
+                                    shape = RoundedCornerShape(25.dp),
+                                    modifier = Modifier
+                                        .align(alignment = Alignment.BottomCenter)
+                                        .padding(bottom = 40.dp)
+                                        .fillMaxWidth()
+                                        .height(70.dp),
+                                    colors = ButtonDefaults.outlinedButtonColors(
+                                        containerColor = Color(0xffF5B97D),
+                                        contentColor = Color.Black
+                                    ),
+                                    border = BorderStroke(width = 2.dp, color = Color.Black)
 
+                                ) {
+                                    Text(
+                                        text = "Get Started",
+                                        fontFamily = FontFamily(
+                                            Font(R.font.montserrat_bold)
+                                        ),
+                                        fontSize = 18.sp,
+                                        modifier = Modifier.padding(start = 50.dp)
+                                    )
+                                    
+                                    Spacer(modifier = Modifier.width(40.dp))
+
+                                    Box(
+                                        modifier = Modifier
+                                            .size(25.dp)
+                                    ) {
+                                        Image(
+                                            painter = painterResource(id = R.drawable.line_arrow),
+                                            contentDescription = ""
+                                        )
+                                    }
                                 }
+
+
                             }
                         }
                     }

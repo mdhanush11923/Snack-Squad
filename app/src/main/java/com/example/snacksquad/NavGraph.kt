@@ -2,17 +2,31 @@ package com.example.snacksquad
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import kotlinx.coroutines.delay
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+@Composable
+fun SetStatusBarColor(color: Color) {
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(color)
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color)
+    )
+}
 @Composable
 fun SetupNavGraph(
     navController: NavHostController
@@ -32,11 +46,12 @@ fun SetupNavGraph(
         }
 
         composable(route = Screens.Registration1.route) {
+            SetStatusBarColor(color = Color(0xffFFC85F))
             RegistrationScreen1(navController = navController)
         }
 
         composable(route = Screens.Registration2.route) {
-            HomeScreen(navController = navController)
+            RegistrationScreen2(navController = navController)
         }
 
         composable(route = Screens.Registration3.route) {

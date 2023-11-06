@@ -47,7 +47,7 @@ import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegistrationScreen3(navController: NavController) {
+fun RegistrationScreen4(navController: NavController) {
     val registrationPageColor = Color(0xffFFC85F)
     var firstName by remember { mutableStateOf("") }
     var isErrorInFistname = false

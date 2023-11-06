@@ -70,7 +70,7 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                 }
             }
 
-            Spacer(modifier = Modifier.padding(10.dp))
+        Spacer(modifier = Modifier.padding(10.dp))
 
         Surface(
             color = Color(0xFF53DEE8),
@@ -238,7 +238,7 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                     modifier = Modifier
                         .padding(start = 50.dp, end = 10.dp)
                 ) {
-                    val qty = remember { mutableStateOf(item?.qty!!) }
+                    val qty = remember { mutableStateOf(Cart.cart.GetItemQty(item?.name!!)) }
 
                     Text(
                         text = "Quantity",
@@ -251,8 +251,10 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                             .size(25.dp)
                             .clickable {
                                 if (qty.value > 0) {
-                                    qty.value--;
-                                    item?.qty = qty.value
+                                    qty.value--
+                                    if (item != null) {
+                                        Cart.cart.RemoveFromCart(item)
+                                    }
                                 }
                             }
                     ) {
@@ -273,7 +275,9 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                             .size(25.dp)
                             .clickable {
                                 qty.value++
-                                item?.qty = qty.value
+                                if (item != null) {
+                                    Cart.cart.AddToCart(item)
+                                }
                             }
                     ) {
                         Image(

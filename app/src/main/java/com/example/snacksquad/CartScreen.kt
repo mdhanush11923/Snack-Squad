@@ -24,6 +24,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -55,7 +56,7 @@ fun CartScreen() {
             color = Color.White,
             shape = RoundedCornerShape(10.dp),
             modifier = Modifier
-                .width(330.dp)
+                .width(350.dp)
                 .height(60.dp),
         ) {
             Text(
@@ -83,13 +84,126 @@ fun CartScreen() {
             contentPadding = PaddingValues(
                 start = 10.dp,
                 end = 10.dp,
-                top = 10.dp
+                top = 10.dp,
+                bottom = 110.dp
             ),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+            verticalArrangement = Arrangement.spacedBy(15.dp)
         ) {
             items(Cart.cart.GetCartItems()) { item: FoodDetail ->
                 if (item.qty > 0)
                     CreateCartColumn(item = item)
+            }
+            item {
+                Surface(
+                    color = Color(0xFFFF7070),
+                    modifier = Modifier
+                        .width(350.dp)
+                        .height(80.dp),
+                    shape = RoundedCornerShape(10.dp),
+                    elevation = 0.dp
+                ) {
+                    val cal = remember { mutableStateOf(Cart.cart.cal) }
+                    Text(
+                        text = "Calorie Count: ${cal.value}",
+                        textAlign = TextAlign.Center,
+                        fontSize = 25.sp,
+                        color = Color.White,
+                        fontFamily = FontFamily(Font(R.font.montserrat_bold)),
+                        modifier = Modifier
+                            .padding(top = 20.dp)
+                    )
+                }
+
+                Spacer(modifier = Modifier.padding(10.dp))
+
+                Surface(
+                    color = Color(0xFF38B6FF),
+                    modifier = Modifier
+                        .width(350.dp)
+                        .height(250.dp),
+                    shape = RoundedCornerShape(10.dp),
+                    elevation = 0.dp
+                ) {
+                    Column(
+                        verticalArrangement = Arrangement.Top,
+                        horizontalAlignment = Alignment.Start,
+                        modifier = Modifier
+                            .padding(horizontal = 30.dp, vertical = 35.dp)
+                            .fillMaxSize()
+                    ) {
+                        Text(
+                            text = "Summary",
+                            fontSize = 25.sp,
+                            color = Color.White,
+                            fontFamily = FontFamily(Font(R.font.montserrat_bold)),
+                            modifier = Modifier
+                                .padding(top = 0.dp)
+                        )
+
+                        Text(
+                            text = "Subtotal",
+                            fontSize = 16.sp,
+                            fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                            modifier = Modifier
+                                .padding(top = 20.dp)
+                        )
+
+                        Text(
+                            text = "Shipping & Handling",
+                            fontSize = 16.sp,
+                            fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                            modifier = Modifier
+                                .padding(top = 20.dp)
+                        )
+
+                        Text(
+                            text = "Total",
+                            fontSize = 16.sp,
+                            fontFamily = FontFamily(Font(R.font.montserrat_bold)),
+                            modifier = Modifier
+                                .padding(top = 20.dp)
+                        )
+                    }
+
+                    Column(
+                        verticalArrangement = Arrangement.Top,
+                        horizontalAlignment = Alignment.End,
+                        modifier = Modifier
+                            .padding(horizontal = 30.dp, vertical = 35.dp)
+                            .fillMaxSize()
+                    ) {
+                        Icon(
+                            Icons.Default.ArrowForward,
+                            contentDescription = "",
+                            tint = Color.White,
+                            modifier = Modifier.size(40.dp)
+                        )
+
+                        Text(
+                            text = "$${String.format("%.2f", Cart.cart.total)}",
+                            fontSize = 16.sp,
+                            fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                            modifier = Modifier
+                                .padding(top = 20.dp)
+                        )
+
+                        Text(
+                            text = "$4.99",
+                            fontSize = 16.sp,
+                            fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                            modifier = Modifier
+                                .padding(top = 20.dp)
+                        )
+
+                        Text(
+                            text = "$${String.format("%.2f", Cart.cart.total + 4.99)}",
+                            fontSize = 16.sp,
+                            fontFamily = FontFamily(Font(R.font.montserrat_bold)),
+                            modifier = Modifier
+                                .padding(top = 20.dp)
+                        )
+                    }
+                }
             }
         }
     }
@@ -219,7 +333,6 @@ fun CreateCartColumn(item: FoodDetail) {
             ) {
                 Icon(Icons.Default.Clear, contentDescription = "")
             }
-
         }
     }
 }

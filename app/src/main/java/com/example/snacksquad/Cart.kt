@@ -2,10 +2,12 @@ package com.example.snacksquad
 
 sealed class Cart(
     var qty: Int,
+    var cal: Int,
+    var total: Float,
     val foodItems: MutableList<FoodDetail>,
     val foodNames: MutableList<String>
 ) {
-    object cart: Cart(0, mutableListOf<FoodDetail>(), mutableListOf<String>())
+    object cart: Cart(0, 0, 0f, mutableListOf<FoodDetail>(), mutableListOf<String>())
 
     fun AddToCart(item: FoodDetail) {
         if (item.name in foodNames) {
@@ -17,6 +19,8 @@ sealed class Cart(
             cart.foodItems.add(item)
             cart.foodNames.add(item.name)
         }
+        cal += item.cal
+        total += item.price
     }
 
     fun RemoveFromCart(item: FoodDetail) {
@@ -30,10 +34,19 @@ sealed class Cart(
                 cart.foodItems[ind].qty--
             }
         }
+        cal -= item.cal
+        total -= item.price
+        if (total < 0)
+            total = 0f
     }
 
     fun DeleteFromCart(item: FoodDetail) {
         val ind = foodNames.indexOf(item.name)
+        cal -= foodItems[ind].cal * foodItems[ind].qty
+        total -= foodItems[ind].price * foodItems[ind].qty
+        if (total < 0)
+            total = 0f
+
         cart.foodItems.removeAt(ind)
         cart.foodNames.removeAt(ind)
         cart.qty--

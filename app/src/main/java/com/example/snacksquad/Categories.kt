@@ -32,7 +32,7 @@ data class FoodDetail(
 
 fun GetSnackOfTheDay(): FoodDetail {
     val foodList = GetFoodItems()
-    val snack = foodList.elementAt(3)//foodList[Random.nextInt(foodList.size)]
+    val snack = foodList.elementAt(2)//foodList[Random.nextInt(foodList.size)]
 
     return snack
 }

@@ -156,10 +156,20 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                     fontFamily = FontFamily(Font(R.font.montserratreg)),
                     fontSize = 16.sp,
                     color = Color(0xFF545454),
-                    maxLines = if (seeMore) 1 else Int.MAX_VALUE,
                     overflow = TextOverflow.Ellipsis
 
                 )
+
+                Spacer(modifier = Modifier.padding(5.dp))
+
+                Text(
+                    text = "\nIngredients: ${item.ingr}",
+                    fontFamily = FontFamily(Font(R.font.montserrat_bold)),
+                    fontSize = 16.sp,
+                    maxLines = if (seeMore) 1 else Int.MAX_VALUE,
+                    overflow = TextOverflow.Ellipsis
+                )
+
                 val textButton = if (seeMore) {
                     "See More"
                 } else {
@@ -178,13 +188,6 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                             seeMore = !seeMore
                         }
                 )
-                Spacer(modifier = Modifier.padding(5.dp))
-
-                Text(
-                    text = "Ingredients: ${item.ingr}",
-                    fontFamily = FontFamily(Font(R.font.montserratreg)),
-                    fontSize = 18.sp,
-                )
             }
         }
 
@@ -200,7 +203,8 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
             modifier = Modifier
                 .clip(CircleShape)
                 .size(180.dp)
-                .background(Color.White)
+                .background(Color.White),
+            contentAlignment = Alignment.Center
         ) {
             Image(
                 painter = painterResource(id = item?.image!!),

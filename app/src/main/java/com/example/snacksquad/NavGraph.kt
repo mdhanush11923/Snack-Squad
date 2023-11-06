@@ -28,6 +28,7 @@ fun SetStatusBarColor(color: Color) {
             .background(color)
     )
 }
+
 @Composable
 fun SetupNavGraph(
     navController: NavHostController
@@ -78,7 +79,7 @@ fun SetupNavGraph(
         }
 
         composable(route = Screens.Search.route) {
-            Text("Tab 2 Content", modifier = Modifier.fillMaxSize())
+            SearchScreen(navController = navController, sharedViewModel = sharedViewModel)
         }
 
         composable(route = Screens.Cart.route) {
@@ -90,7 +91,7 @@ fun SetupNavGraph(
         }
 
         composable(route = Screens.Blank.route) {
-            Text("Tab 3 Content", modifier = Modifier.fillMaxSize())
+            Text("No Content", modifier = Modifier.fillMaxSize())
         }
     }
 }

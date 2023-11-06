@@ -203,7 +203,7 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
             modifier = Modifier
                 .clip(CircleShape)
                 .size(180.dp)
-                .background(Color.Black),
+                .background(Color.White),
             contentAlignment = Alignment.Center
         ) {
             Image(

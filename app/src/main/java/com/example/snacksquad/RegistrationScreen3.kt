@@ -49,14 +49,12 @@ import androidx.navigation.NavController
 @Composable
 fun RegistrationScreen3(navController: NavController) {
     val registrationPageColor = Color(0xffFFC85F)
-    var firstName by remember { mutableStateOf("") }
-    var isErrorInFistname = false
-    var lastName by remember { mutableStateOf("") }
-    var isErrorInLastname = false
-    var emailId by remember { mutableStateOf("") }
-    var isErrorInEmailId = false
-    var password by remember { mutableStateOf("") }
-    var isErrorInPassword = false
+    var address1 by remember { mutableStateOf("") }
+    var isErrorInAddress1 = false
+    var address2 by remember { mutableStateOf("") }
+    var isErrorInAddress2 = false
+    var address3 by remember { mutableStateOf("") }
+    var isErrorInAddress3 = false
     var fieldShape = RoundedCornerShape(10.dp)
     var categoryNameStartPadding = 15.dp
     var categoryNameFontFamily = FontFamily(
@@ -86,7 +84,7 @@ fun RegistrationScreen3(navController: NavController) {
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
-                        text = "1/4",
+                        text = "3/4",
                         textAlign = TextAlign.Center,
                         fontSize = 16.sp,
                         color = Color.Black,
@@ -95,7 +93,7 @@ fun RegistrationScreen3(navController: NavController) {
                 }
 
                 Text(
-                    text = "The start is a piece of cake!",
+                    text = "Share your Snackster HQ",
                     textAlign = TextAlign.Center,
                     fontFamily = FontFamily(Font(R.font.mottersemico)),
                     fontSize = 22.sp,
@@ -109,7 +107,7 @@ fun RegistrationScreen3(navController: NavController) {
                     .padding(horizontal = 50.dp)
                 ){// Pie Container
                     Image(
-                        painter = painterResource(id = R.drawable.piepiece1),
+                        painter = painterResource(id = R.drawable.piepiece3),
                         contentDescription = "Pie Image",
                         modifier = Modifier
                             .fillMaxSize()
@@ -139,7 +137,7 @@ fun RegistrationScreen3(navController: NavController) {
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = "Create Profile",
+                                text = "Enter your address",
                                 textAlign = TextAlign.Center,
                                 fontFamily = FontFamily(Font(R.font.mottersemico)),
                                 fontSize = 22.sp,
@@ -147,122 +145,16 @@ fun RegistrationScreen3(navController: NavController) {
                             )
                         }
 
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-
-                        ) {
-
-                            Column(modifier = Modifier
-                                .width(140.dp)
-                            ) {
-
-                                Column {
-                                    OutlinedTextField(
-                                        value = firstName,
-
-                                        onValueChange = {
-                                            firstName = it
-                                            isErrorInFistname = it.isEmpty()
-                                        },
-
-                                        shape = fieldShape,
-
-                                        label = { Text(text = "Firstname") },
-
-                                        modifier = Modifier
-                                            .align(alignment = Alignment.CenterHorizontally)
-                                            .fillMaxWidth(),
-
-                                        textStyle = TextStyle(
-                                            fontFamily = FontFamily(
-                                                Font(R.font.montserrat_semibold)
-                                            )
-                                        ),
-
-                                        colors = TextFieldDefaults.textFieldColors(
-                                            containerColor = Color(0xFFF5F5F5),
-                                            cursorColor = Color.Black,
-                                            focusedIndicatorColor = Color.Black,
-                                            focusedLabelColor = Color.Black
-                                        ),
-
-                                        supportingText = {
-                                            if (isErrorInFistname) {
-                                                Text(text = "Fill it")
-                                            }
-                                        },
-
-                                        isError = isErrorInFistname
-                                    )
-
-
-                                }
-                            }
-
-                            Column(modifier = Modifier
-                                .width(140.dp)
-                            ) {
-
-                                Column {
-
-                                    OutlinedTextField(
-                                        value = lastName,
-
-                                        onValueChange = {
-                                            lastName = it
-                                            isErrorInLastname = it.isEmpty()
-                                        },
-
-                                        shape = fieldShape,
-
-                                        label = { Text(text = "Lastname") },
-
-                                        modifier = Modifier
-                                            .align(alignment = Alignment.CenterHorizontally)
-                                            .fillMaxWidth(),
-
-                                        textStyle = TextStyle(
-                                            fontFamily = FontFamily(
-                                                Font(R.font.montserrat_semibold)
-                                            )
-                                        ),
-
-                                        colors = TextFieldDefaults.textFieldColors(
-                                            containerColor = Color(0xFFF5F5F5),
-                                            cursorColor = Color.Black,
-                                            focusedIndicatorColor = Color.Black,
-                                            focusedLabelColor = Color.Black
-                                        ),
-
-                                        supportingText = {
-                                            if (isErrorInLastname) {
-                                                Text(text = "Fill it")
-                                            }
-                                        },
-
-                                        isError = isErrorInLastname
-                                    )
-
-
-                                }
-
-                            }
-
-                        }
-
                         Column {
-
                             OutlinedTextField(
-                                value = emailId,
+                                value = address1,
 
                                 onValueChange = {
-                                    emailId = it
-                                    isErrorInEmailId = it.isEmpty()
+                                    address1 = it
+                                    isErrorInAddress1 = it.isEmpty()
                                 },
 
-                                label = { Text(text = "Email Id") },
+                                label = { Text(text = "City/Town Name") },
 
                                 shape = fieldShape,
 
@@ -284,32 +176,23 @@ fun RegistrationScreen3(navController: NavController) {
                                 ),
 
                                 supportingText = {
-                                    if (isErrorInEmailId) {
+                                    if (isErrorInAddress1) {
                                         Text(text = "Fill it")
                                     }
                                 },
 
-                                isError = isErrorInEmailId
+                                isError = isErrorInAddress1
                             )
 
-
-                        }
-
-                        Column {
-
                             OutlinedTextField(
-                                value = password,
-
-                                visualTransformation = PasswordVisualTransformation(),
-
-                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                                value = address2,
 
                                 onValueChange = {
-                                    password = it
-                                    isErrorInPassword = it.isEmpty()
+                                    address2 = it
+                                    isErrorInAddress2 = it.isEmpty()
                                 },
 
-                                label = { Text(text = "Password") },
+                                label = { Text(text = "Street/Local Area Name") },
 
                                 shape = fieldShape,
 
@@ -331,19 +214,76 @@ fun RegistrationScreen3(navController: NavController) {
                                 ),
 
                                 supportingText = {
-                                    if (isErrorInPassword) {
+                                    if (isErrorInAddress2) {
                                         Text(text = "Fill it")
                                     }
                                 },
 
-                                isError = isErrorInPassword
+                                isError = isErrorInAddress2
                             )
+
+                            OutlinedTextField(
+                                value = address3,
+
+                                onValueChange = {
+                                    address3 = it
+                                    isErrorInAddress3 = it.isEmpty()
+                                },
+
+                                label = { Text(text = "Building floor Number") },
+
+                                shape = fieldShape,
+
+                                modifier = Modifier
+                                    .align(alignment = Alignment.CenterHorizontally)
+                                    .fillMaxWidth(),
+
+                                textStyle = TextStyle(
+                                    fontFamily = FontFamily(
+                                        Font(R.font.montserrat_semibold)
+                                    )
+                                ),
+
+                                colors = TextFieldDefaults.textFieldColors(
+                                    containerColor = Color(0xFFF5F5F5),
+                                    cursorColor = Color.Black,
+                                    focusedIndicatorColor = Color.Black,
+                                    focusedLabelColor = Color.Black
+                                ),
+
+                                supportingText = {
+                                    if (isErrorInAddress3) {
+                                        Text(text = "Fill it")
+                                    }
+                                },
+
+                                isError = isErrorInAddress3
+                            )
+
                         }
+
 
                         Box(modifier = Modifier.padding(top = 10.dp)) {
                             Button(
                                 onClick = {
-                                    navController.navigate(route = Screens.Registration2.route)
+                                    if (address1.isNotEmpty()) {
+                                        if (address2.isNotEmpty()) {
+                                            if (address3.isNotEmpty()) {
+
+                                                navController.navigate(route = Screens.Registration4.route)
+
+                                            }
+                                            else {
+                                                isErrorInAddress3 = true
+                                            }
+                                        }
+                                        else {
+                                            isErrorInAddress2 = true
+                                        }
+                                    }
+                                    else {
+                                        isErrorInAddress1 = true
+                                    }
                                 },
                                 shape = RoundedCornerShape(25.dp),
                                 modifier = Modifier
@@ -358,7 +298,7 @@ fun RegistrationScreen3(navController: NavController) {
 
                             ) {
                                 Text(
-                                    text = "Get Started",
+                                    text = "Confirm",
                                     fontFamily = FontFamily(
                                         Font(R.font.montserrat_bold)
                                     ),

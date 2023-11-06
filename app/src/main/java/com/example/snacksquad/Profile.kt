@@ -371,7 +371,7 @@ fun ProfileScreen(navController: NavController) {
                                     isErrorInAddress1 = it.isEmpty()
                                 },
 
-                                label = { Text(text = "Enter username") },
+                                label = { Text(text = "City/Town Name") },
 
                                 shape = fieldShape,
 
@@ -409,7 +409,7 @@ fun ProfileScreen(navController: NavController) {
                                     isErrorInAddress2 = it.isEmpty()
                                 },
 
-                                label = { Text(text = "Enter username") },
+                                label = { Text(text = "Street/Local Area Name") },
 
                                 shape = fieldShape,
 
@@ -447,7 +447,7 @@ fun ProfileScreen(navController: NavController) {
                                     isErrorInAddress3 = it.isEmpty()
                                 },
 
-                                label = { Text(text = "Enter username") },
+                                label = { Text(text = "Building floor Number") },
 
                                 shape = fieldShape,
 
@@ -504,7 +504,7 @@ fun ProfileScreen(navController: NavController) {
 
                                                     }
                                                     else {
-                                                        isErrorInLastname = true
+                                                        isErrorInAddress3 = true
                                                     }
                                                 }
                                                 else {

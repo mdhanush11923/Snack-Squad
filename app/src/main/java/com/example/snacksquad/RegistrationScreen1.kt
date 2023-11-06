@@ -58,11 +58,6 @@ fun RegistrationScreen1(navController: NavController) {
     var password by remember { mutableStateOf("") }
     var isErrorInPassword = false
     var fieldShape = RoundedCornerShape(10.dp)
-    var categoryNameStartPadding = 15.dp
-    var categoryNameFontFamily = FontFamily(
-        Font(R.font.montserrat_bold)
-    )
-    var categoryNameSize = 16.sp
 
     Box(
         modifier = Modifier
@@ -130,7 +125,7 @@ fun RegistrationScreen1(navController: NavController) {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(20.dp, 30.dp, 20.dp, 0.dp),
+                            .padding(30.dp),
                         verticalArrangement = Arrangement.spacedBy(5.dp)
                     ) {
                         Box(
@@ -155,7 +150,7 @@ fun RegistrationScreen1(navController: NavController) {
                         ) {
 
                             Column(modifier = Modifier
-                                .width(140.dp)
+                                .width(130.dp)
                             ) {
 
                                 Column {
@@ -202,7 +197,7 @@ fun RegistrationScreen1(navController: NavController) {
                             }
 
                             Column(modifier = Modifier
-                                .width(140.dp)
+                                .width(130.dp)
                             ) {
 
                                 Column {
@@ -343,7 +338,27 @@ fun RegistrationScreen1(navController: NavController) {
                         Box(modifier = Modifier.padding(top = 10.dp)) {
                             Button(
                                 onClick = {
-                                    navController.navigate(route = Screens.Registration2.route)
+                                    if (firstName.isNotEmpty()) {
+                                        if (lastName.isNotEmpty()) {
+                                            if (emailId.isNotEmpty()) {
+                                                if (password.isNotEmpty()) {
+                                                    navController.navigate(route = Screens.Registration2.route)
+                                                }
+                                                else {
+                                                    isErrorInPassword = true
+                                                }
+                                            }
+                                            else {
+                                                isErrorInEmailId = true
+                                            }
+                                        }
+                                        else {
+                                            isErrorInLastname = true
+                                        }
+                                    }
+                                    else {
+                                        isErrorInFistname = true
+                                    }
                                 },
                                 shape = RoundedCornerShape(25.dp),
                                 modifier = Modifier
@@ -358,7 +373,7 @@ fun RegistrationScreen1(navController: NavController) {
 
                             ) {
                                 Text(
-                                    text = "Get Started",
+                                    text = "Confirm",
                                     fontFamily = FontFamily(
                                         Font(R.font.montserrat_bold)
                                     ),

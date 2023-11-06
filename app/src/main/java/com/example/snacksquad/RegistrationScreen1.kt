@@ -342,6 +342,7 @@ fun RegistrationScreen1(navController: NavController) {
                                         if (lastName.isNotEmpty()) {
                                             if (emailId.isNotEmpty()) {
                                                 if (password.isNotEmpty()) {
+                                                    User.user.FillPersonalInfo(firstName, lastName, emailId, password)
                                                     navController.navigate(route = Screens.Registration2.route)
                                                 }
                                                 else {

@@ -269,9 +269,8 @@ fun RegistrationScreen3(navController: NavController) {
                                     if (address1.isNotEmpty()) {
                                         if (address2.isNotEmpty()) {
                                             if (address3.isNotEmpty()) {
-
+                                                User.user.FillAddress(address1, address2, address3)
                                                 navController.navigate(route = Screens.Registration4.route)
-
                                             }
                                             else {
                                                 isErrorInAddress3 = true

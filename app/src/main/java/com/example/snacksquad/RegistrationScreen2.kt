@@ -143,6 +143,7 @@ fun RegistrationScreen2(navController: NavController) {
                         Box(modifier = Modifier.padding(vertical = 10.dp)) {
                             Button(
                                 onClick = {
+                                    User.user.dietPref = true
                                     navController.navigate(route = Screens.Registration3.route)
                                 },
                                 shape = RoundedCornerShape(25.dp),

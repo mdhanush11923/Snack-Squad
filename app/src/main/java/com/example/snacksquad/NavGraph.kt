@@ -5,6 +5,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -31,13 +34,17 @@ fun SetStatusBarColor(color: Color) {
 fun SetupNavGraph(
     navController: NavHostController
 ) {
+    val sharedViewModel: SharedViewModel = viewModel()
+
     NavHost(
         navController = navController,
         startDestination = Screens.Opening.route
     ) {
-        composable(route = Screens.Home.route) {
-            SetStatusBarColor(color = Color(0xFFFFF48F))
-            HomeScreen(navController = navController)
+
+        composable(route = Screens.Opening.route) {
+          SetStatusBarColor(color = Color(0xFFFFF48F))
+            HomeScreen(navController = navController, sharedViewModel = sharedViewModel)
+
         }
 
         composable(route = Screens.Opening.route) {
@@ -60,19 +67,20 @@ fun SetupNavGraph(
 
         composable(route = Screens.Registration4.route) {
             RegistrationScreen4(navController = navController)
+
         }
 
         composable(route = Screens.Home.route) {
-            HomeScreen(navController = navController)
+            HomeScreen(navController = navController, sharedViewModel = sharedViewModel)
         }
 
         composable(route = "${Screens.Menu.route}/{categoryTitle}") {
             val categoryTitle = it.arguments?.getString("categoryTitle")
-            MenuScreen(categoryTitle = categoryTitle, navController = navController)
+            MenuScreen(categoryTitle = categoryTitle, navController = navController, sharedViewModel = sharedViewModel)
         }
 
         composable(route = Screens.Food.route) {
-            FoodScreen(navController = navController)
+            FoodScreen(navController = navController, sharedViewModel = sharedViewModel)
         }
 
         composable(route = Screens.Search.route) {

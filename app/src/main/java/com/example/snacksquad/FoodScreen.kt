@@ -156,7 +156,7 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                     fontFamily = FontFamily(Font(R.font.montserratreg)),
                     fontSize = 16.sp,
                     color = Color(0xFF545454),
-                    maxLines = if (seeMore) 5 else Int.MAX_VALUE,
+                    maxLines = if (seeMore) 1 else Int.MAX_VALUE,
                     overflow = TextOverflow.Ellipsis
 
                 )

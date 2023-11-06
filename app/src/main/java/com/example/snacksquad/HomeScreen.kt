@@ -179,7 +179,8 @@ fun CreateCategories(item: CategoryDetail, navController: NavController, sharedV
                     .clickable {
                         sharedViewModel.addItem(newItem = snackOfTheDay)
                         navController.navigate(Screens.Food.route)
-                    }
+                    },
+                    contentAlignment = Alignment.Center
                 ) {
                     Image(
                         painter = painterResource(id = snackOfTheDay.image),
@@ -221,7 +222,8 @@ fun CreateFoodRow(item: FoodDetail, navController: NavController, sharedViewMode
             .clickable {
                 sharedViewModel.addItem(newItem = item)
                 navController.navigate(Screens.Food.route)
-            }
+            },
+            contentAlignment = Alignment.Center
         ) {
             Image(
                 painter = painterResource(id = item.image),

@@ -291,7 +291,7 @@ fun FoodScreen(navController: NavController, sharedViewModel: SharedViewModel) {
                             .height(50.dp)
                             .width(80.dp)
                             .clickable {
-
+                                navController.navigate(Screens.Cart.route)
                             }
                     ) {
                         Image(

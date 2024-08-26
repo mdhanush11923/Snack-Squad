@@ -1,6 +1,6 @@
 # SI-GuidedProject-587546-1697041933
 
-![Project Logo](images/logo.png)
+![Project Logo](app/src/main/res/drawable/snackk.jpg)
 
 Snack Squad: A Customizable Snack Ordering And Delivery App
 

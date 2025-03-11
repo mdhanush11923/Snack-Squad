@@ -1,6 +1,6 @@
 # Snack Squad: A Customizable Snack Ordering And Delivery App
 
-![Project Logo](app/src/main/res/drawable/snackk.jpg)
+![Project Logo](images/SnackSquad.png)
 
 
 
